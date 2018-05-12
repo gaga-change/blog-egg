@@ -1,3 +1,6 @@
+/**
+ * 解析 post 目录下所有.md 文件，转为相关数据
+ */
 const path = require('path')
 const fs = require('fs')
 const yaml = require('js-yaml')
@@ -9,9 +12,10 @@ const dataPath = { list: path.join(jsonDir, 'list'), post: path.join(jsonDir, 'p
 
 if (!fs.existsSync(jsonDir)) fs.mkdirSync(jsonDir) // 如果json目录不存在则创建
 Object.keys(dataPath).forEach(key => {
-    if (!fs.existsSync(dataPath[key])) fs.mkdirSync(dataPath[key]) 
+    if (!fs.existsSync(dataPath[key])) fs.mkdirSync(dataPath[key])
 })
-{
+
+module.exports = () => {
     // 获取post文件名
     let mdFile = fs.readdirSync(postDir)
     mdFile = mdFile.filter(item => path.extname(item) == '.md') // 过滤非md文件
@@ -39,7 +43,7 @@ Object.keys(dataPath).forEach(key => {
     while (mdFile.length) {
         page++
         let list = mdFile.splice(0, pageSize)
-        let listObj = {totalNum, page, pageSize, list}
+        let listObj = { totalNum, page, pageSize, list }
         fs.writeFileSync(path.join(dataPath.list, page + '.json'), JSON.stringify(listObj))
     }
     // 列表存储

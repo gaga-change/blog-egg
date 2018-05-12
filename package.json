@@ -19,6 +19,7 @@
   "homepage": "https://github.com/gaga-change/gaga-change#readme",
   "dependencies": {
     "js-yaml": "^3.11.0",
-    "koa": "^2.5.1"
+    "koa": "^2.5.1",
+    "markdown-it": "^8.4.1"
   }
 }

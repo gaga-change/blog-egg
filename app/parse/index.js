@@ -1,7 +1,8 @@
 const path = require('path')
 const fs = require('fs')
-// const meta = require('meta')
 const yaml = require('js-yaml')
+const md = require('markdown-it')()
+
 const postDir = path.resolve(__dirname, '../../post')
 const jsonDir = path.resolve(__dirname, '../../json')
 const dataPath = { list: path.join(jsonDir, 'list'), post: path.join(jsonDir, 'post') }
@@ -20,9 +21,10 @@ Object.keys(dataPath).forEach(key => {
             let post = fs.readFileSync(path.join(postDir, item)).toString()
             let bloks = post.split('---')
             let metaYaml = bloks[1]
-            let postContent = bloks.splice(2).join('') // 文章主体内容
+            let postContent = md.render((bloks.splice(2).join(''))) // 文章主体内容
             let meta = yaml.load(metaYaml) // 文章媒体信息
             meta.basename = basename // 如果没有id，默认为文件名
+            meta.intor = postContent.replace(/(\s|<[^>]+>)+/ig, ' ').substr(0, 56).trim() // 简介
             let detail = { meta, content: postContent }
             fs.writeFileSync(path.join(dataPath.post, basename + '.json'), JSON.stringify(detail))
             return meta

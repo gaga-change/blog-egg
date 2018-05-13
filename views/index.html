@@ -28,114 +28,32 @@
         <!-- 列表 -->
         <div class="row">
             <ul class="col">
+                {% for post in data.list %}
                 <li class="media">
-                    <div class="media-body post-item">
-                        <a href="./detail.html">
-                            <h5 class="mt-0">Media heading</h5>
-                            <i class="itme">2016-09-15</i>
+                    <div class="media-body post-item" style="position: relative;">
+                        <a href="/post/{{post.id}}">
+                            <h5 class="mt-0">{{post.title}}</h5>
+                            <i class="itme">{{ post.date|date('Y-m-d') }}</i>
                             <p>
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-                                vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.
-                                Donec lacinia congue felis in faucibus.
+                                {{post.intor}}...
                             </p>
                             <hr>
                         </a>
                     </div>
                 </li>
-                <li class="media post-item">
-                    <div class="media-body">
-                        <h5 class="mt-0 title">Media heading</h5>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-                        vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia
-                        congue felis in faucibus.
-                    </div>
-                </li>
-                <li class="media">
-                    <div class="media-body">
-                        <h5 class="mt-0">Media heading</h5>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-                        vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia
-                        congue felis in faucibus.
-                    </div>
-                </li>
+                {% endfor %}
+
             </ul>
         </div>
-        <div class="row loader-more justify-content-center">
-            <a class="" href="javascript:void(0)" id="loader-more">加载更多</a>
-            <img class="d-none" src="/img/postload.gif" alt="加载更多" id="LoaderMoreLogo">
-        </div>
-        <!-- 底部 -->
-        <!-- 页脚 -->
-        <footer class="row page-footer" style="display: none">
-            <!--友情链接 用到的技术 赞助商-->
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="widget link">
-                            <h4 class="title">博客版本</h4>
-                            <ul class="list-unstyled">
-                                <li>
-                                    <a class="active" href="#">VUE(SSR)版</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="widget box">
-                            <h4 class="title">运用到的技术</h4>
-                            <ul class="list-unstyled clearfix">
-                                <li>
-                                    <a href="https://cn.vuejs.org/" target="_blank">Vue</a>
-                                </li>
-                                <li>
-                                    <a href="http://lesscss.cn/" target="_blank">Less</a>
-                                </li>
-                                <li>
-                                    <a href="https://zh.nuxtjs.org/" target="_blank">Nuxt</a>
-                                </li>
-                                <li>
-                                    <a href="http://www.gulpjs.com.cn/" target="_blank">Gulp</a>
-                                </li>
-                                <li>
-                                    <a href="https://doc.webpack-china.org/" target="_blank">Webpack</a>
-                                </li>
-                                <li>
-                                    <a href="http://nodejs.cn/" target="_blank">NodeJS</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="widget friend">
-                            <h4 class="title">友情链接</h4>
-                            <ul class="list-unstyled clearfix">
-                                <li>
-                                    <a href="http://www.yangqq.com/">杨青个人博客</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--备案号-->
-            <div class="record text-center">
-                <span>Copyright ©
-                    <a href="#">喜欢JS的无名小站</a>
-                </span> |
-                <span>
-                    <a href="http://www.miibeian.gov.cn/">浙ICP备17054210号</a>
-                </span>
-            </div>
-        </footer>
     </div>
 
-    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script> -->
     <!-- <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
     <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>-->
-    <script src="/js/main.js"></script> 
+    <!-- <script src="/js/main.js"></script>  -->
 </body>
 
 </html>

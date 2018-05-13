@@ -7,6 +7,6 @@ router.get('/test', async (ctx, next) => {
     ctx.body = 'test'
 })
 router.get('/', pages.home)
-router.get('/post/:id', pages.home)
+router.get('/post/:id', pages.detail)
 
 module.exports = router.routes()

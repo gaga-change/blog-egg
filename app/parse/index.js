@@ -27,10 +27,10 @@ module.exports = () => {
             let metaYaml = bloks[1]
             let postContent = md.render((bloks.splice(2).join(''))) // 文章主体内容
             let meta = yaml.load(metaYaml) // 文章媒体信息
-            meta.basename = basename // 如果没有id，默认为文件名
+            meta.id = meta.id || basename // 如果没有id，默认为文件名
             meta.intor = postContent.replace(/(\s|<[^>]+>)+/ig, ' ').substr(0, 56).trim() // 简介
             let detail = { meta, content: postContent }
-            fs.writeFileSync(path.join(dataPath.post, basename + '.json'), JSON.stringify(detail))
+            fs.writeFileSync(path.join(dataPath.post, meta.id + '.json'), JSON.stringify(detail))
             return meta
         } else {
             return item
@@ -39,7 +39,7 @@ module.exports = () => {
     // 存储分页信息
     const totalNum = mdFile.length
     let page = 0
-    const pageSize = 10
+    const pageSize = 30
     while (mdFile.length) {
         page++
         let list = mdFile.splice(0, pageSize)

@@ -30,10 +30,10 @@
             <div class="row">
                 <div class="col">
                     <header class="post-header">
-                        <h1 class="title">第一篇文章</h1>
+                        <h1 class="title">{{post.meta.title}}</h1>
                         <div class="post-meta">
-                            <span class="meta">2016-09-10</span>
-                            <span class="meta tag">JavaScript/CSS</span>
+                            <span class="meta">{{ post.meta.date|date('Y-m-d') }}</span>
+                            <span class="meta tag">{{post.meta.tagsStr}}</span>
                         </div>
                         <hr>
                     </header>
@@ -42,12 +42,10 @@
             <!-- 文章主题 -->
             <div class="row">
                 <div class="col">
-                    <p>嘎嘎</p>
+                    {% autoescape false %}{{post.content}} {% endautoescape %}
                 </div>
             </div>
         </div>
-
-
     </div>
 </body>
 

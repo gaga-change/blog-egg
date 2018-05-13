@@ -1,9 +1,12 @@
 
+const dataFile = require('../db/dataFile')
+
 /**
  * 主页
  */
 exports.home = async (ctx, next) => {
-    await ctx.render('index', {})
+    let data = dataFile.getPostList()
+    await ctx.render('index', {data})
 }
 
 /**
@@ -13,5 +16,9 @@ exports.home = async (ctx, next) => {
  *   id | 文章ID
  */
 exports.detail = async (ctx, next) => {
-    ctx.body = 'detail'
+    let id = ctx.params.id
+    if (!id) return next()
+    let post = dataFile.getPostDetail(id)
+    post.meta.tagsStr = post.meta.tags.join('/')
+    await ctx.render('detail', {post})
 }

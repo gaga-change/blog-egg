@@ -7,22 +7,27 @@ const mount = require('koa-mount')
 const path = require('path')
 const staticCache = require('koa-static-cache')
 const api = require('./api')
+const render = require('./lib/render');
 const parse = require('./parse')
 
 parse() // 解析post目录下的md文件
 
 const app = module.exports = new Koa()
 
-app.use(koaBody())
-app.use(logger())
-app.use(staticCache(path.resolve(__dirname, '../publish'), {
+app.use(koaBody()) // body解析
+app.use(logger()) // 日志
+// 静态资源
+app.use(staticCache(path.resolve(__dirname, '../publish'), { 
     maxAge: 365 * 24 * 60 * 60,
     gzip: true,
 }))
+// json资源
 app.use(mount('/json', staticCache(path.resolve(__dirname, '../json'), {
     maxAge: 365 * 24 * 60 * 60,
     gzip: true,
 })))
+// 模板引擎
+app.use(render)
 
 app.use(api)
 

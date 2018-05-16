@@ -6,9 +6,13 @@ const koaBody = require('koa-body')
 const mount = require('koa-mount')
 const path = require('path')
 const staticCache = require('koa-static-cache')
+const mongoose = require('mongoose')
 const api = require('./api')
-const render = require('./lib/render');
+const render = require('./lib/render')
 const parse = require('./parse')
+
+mongoose.connect('mongodb://localhost/test')
+const db = mongoose.connection;
 
 parse() // 解析post目录下的md文件
 
@@ -17,7 +21,7 @@ const app = module.exports = new Koa()
 app.use(koaBody()) // body解析
 app.use(logger()) // 日志
 // 静态资源
-app.use(staticCache(path.resolve(__dirname, '../publish'), { 
+app.use(staticCache(path.resolve(__dirname, '../publish'), {
     maxAge: 365 * 24 * 60 * 60,
     gzip: true,
 }))
@@ -31,6 +35,11 @@ app.use(render)
 
 app.use(api)
 
-if (!module.parent) app.listen(8080, () => {
-    console.log(8080)
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+    // we're connected!
+    console.log('connect')
+    app.listen(8080, () => {
+        console.log(8080)
+    })
 })

@@ -1,3 +1,9 @@
+.container {
+  max-width: 750px!important;
+}
+.media {
+  margin-bottom: .4rem;
+}
 .page-footer {
   background-color: #202020;
   padding: 35px 0 0 0;
@@ -90,9 +96,9 @@
   margin-bottom: 15px;
 }
 .post-item .itme {
-  position: absolute;
+  /* position: absolute;
   top: 0;
-  right: 15px;
+  right: 15px; */
 }
 .post-item hr {
   width: 30%;

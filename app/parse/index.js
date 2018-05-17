@@ -42,7 +42,7 @@ module.exports = () => {
     const pageSize = 30
     while (mdFile.length) {
         page++
-        let list = mdFile.splice(0, pageSize)
+        let list = mdFile.splice(0, pageSize).reverse()
         let listObj = { totalNum, page, pageSize, list }
         fs.writeFileSync(path.join(dataPath.list, page + '.json'), JSON.stringify(listObj))
     }

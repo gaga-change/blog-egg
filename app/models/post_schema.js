@@ -4,6 +4,13 @@ const only = require('only')
 
 const Schema = mongoose.Schema
 
+const TYPE = {
+    PUBLISH: 'publist', // 发布状态
+    DRAFT: 'draft', // 草稿
+    PRIVATE: 'private', // 私密状态
+    REMOVE: 'remove', // 移除状态
+}
+
 /**
  * Post Schema
  */
@@ -14,6 +21,7 @@ const PostSchema = new Schema({
     categories: { type: Array, default: [] }, // 目录 
     id: { type: Number, default: 0 }, // 文档ID值
     date: { type: Date, default: Date.now }, // 创建时间
+    // state: { type: Number, default: TYPE.PUBLISH }, // 状态 [发布,草稿,私密,移除]
     intro: { type: String, default: '', trim: true } // 描述
 })
 
@@ -30,7 +38,10 @@ PostSchema.methods = {
 
 /** 静态方法 */
 PostSchema.statics = {
-
+    /** 获取所有文章 */
+    _findAll() {
+        return this.find({}).select('-content')
+    },
 }
 
 module.exports = mongoose.model('Post', PostSchema)

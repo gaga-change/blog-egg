@@ -16,15 +16,19 @@ module.exports = {
         ctx.body = { data: ret.post, err: ret.err }
     },
     /** 查询 */
-    async find() {
-
+    async find(ctx) {
+        let query = ctx.query
+        if (!query.id) ctx.throw(400, 'id required') // id or _id
+        let ret = await post.findOne(query.id)
+        ctx.body = { data: ret.post, err: ret.err }
     },
     /** 查询所有 */
-    async findAll() {
-
+    async findAll(ctx) {
+        let ret = await post.findAll()
+        ctx.body = { data: ret.posts }
     },
     /** 移动到垃圾箱 */
-    async remove() {
+    async remove(ctx) {
 
     },
     /** 永久删除 */

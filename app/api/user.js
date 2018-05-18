@@ -14,8 +14,37 @@ exports.findUser = async (ctx, next) => {
  */
 exports.userSave = async (ctx, next) => {
     let body = ctx.request.body
-    if (!body.username) ctx.throw(400, 'username required');
-    if (!body.password) ctx.throw(400, 'password required');
-    let u = await user.userSave(body.username, body.password)
-    ctx.body = { data: u.user, err: u.err }
+    if (!body.username) ctx.throw(400, 'username required')
+    if (!body.password) ctx.throw(400, 'password required')
+    let ret = await user.userCreate(body.username, body.password)
+    ctx.session.user = ret.user
+    ctx.body = { data: ret.user, err: ret.err }
+}
+
+/**
+ * 登入
+ */
+exports.login = async (ctx, next) => {
+    let body = ctx.request.body
+    if (!body.username) ctx.throw(400, 'username required')
+    if (!body.password) ctx.throw(400, 'password required')
+    let ret = await user.passwordCheck(body.username, body.password)
+    ctx.session.user = ret.user
+    ctx.body = { data: ret.user, err: ret.err }
+}
+
+/**
+ * 获取当前登入用户
+ */
+exports.user = async (ctx, next) => {
+    let user = ctx.session.user
+    ctx.body = { data: user }
+}
+
+/**
+ * 退出登入
+ */
+exports.logout = async (ctx) => {
+    ctx.session = null
+    ctx.body = {}
 }

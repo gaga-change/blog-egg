@@ -1,6 +1,7 @@
 
 const mongoose = require('mongoose')
 const crypto = require('crypto')
+const only = require('only')
 
 const Schema = mongoose.Schema
 
@@ -58,6 +59,7 @@ UserSchema.pre('save', function (next) {
 
 UserSchema.methods = {
 
+    
     /**
      * 验证 - 检测密码是否正确
      *
@@ -126,7 +128,7 @@ UserSchema.statics = {
      */
     _findAll() {
         return this.find({}).select('username  _id')
-    }
+    },
 }
 
 module.exports = mongoose.model('User', UserSchema)

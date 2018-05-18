@@ -7,9 +7,10 @@ const user = require('./user')
 router.get('/test', async (ctx, next) => {
     ctx.body = 'test'
 })
-router.get('/', pages.home)
-router.get('/archives/:id', pages.detail)
+router.get('/', pages.home) // 主页
+router.get('/archives/:id', pages.detail) // 详情页
 
-router.get('/api/users', user.findUser)
+router.get('/api/users', user.findUser) // 获取用户
+router.post('/api/user', user.userSave) // 获取用户
 
 module.exports = router.routes()

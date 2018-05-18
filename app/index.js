@@ -11,14 +11,14 @@ const api = require('./api')
 const render = require('./lib/render')
 const parse = require('./parse')
 
-mongoose.connect('mongodb://localhost/test')
+mongoose.connect('mongodb://dsh.junn.top:27017/test')
 const db = mongoose.connection;
 
 parse() // 解析post目录下的md文件
 
 const app = module.exports = new Koa()
 
-app.use(koaBody()) // body解析
+app.use(koaBody({jsonLimit: '10kb'})) // body解析
 app.use(logger()) // 日志
 // 静态资源
 app.use(staticCache(path.resolve(__dirname, '../publish'), {

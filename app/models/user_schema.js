@@ -47,7 +47,7 @@ UserSchema.path('hashed_password').validate(pwd => pwd.length, '密码不能为�
 
 UserSchema.pre('save', function (next) {
     if (this.isNew) {
-        console.log('新用户：', this, usernmae)
+        console.log('新用户：', this.username)
     }
     next()
 })
@@ -107,7 +107,6 @@ UserSchema.methods = {
  */
 
 UserSchema.statics = {
-
     /**
      * Load
      *
@@ -125,7 +124,7 @@ UserSchema.statics = {
     /**
      * 获取所有用户
      */
-    findAll() {
+    _findAll() {
         return this.find({}).select('username  _id')
     }
 }

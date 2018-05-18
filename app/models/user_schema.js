@@ -10,7 +10,7 @@ const Schema = mongoose.Schema
  */
 
 const UserSchema = new Schema({
-    username: { type: String, default: '' }, // 用户名
+    username: { type: String, default: '', trim: true }, // 用户名
     hashed_password: { type: String, default: '' },
     salt: { type: String, default: '' },
     createDate: { type: Date, default: Date.now }, // 创建时间
@@ -19,10 +19,7 @@ const UserSchema = new Schema({
 // 验证是否存在
 const validatePresenceOf = value => value && value.length
 
-/**
- * 虚拟属性 Virtuals   password
- */
-
+/** 虚拟属性 */
 UserSchema
     .virtual('password')
     .set(function (password) {
@@ -34,18 +31,11 @@ UserSchema
         return this._password
     })
 
-/**
- * Validations
- * 验证
- */
-
+/** 参数验证 */
 UserSchema.path('username').validate(name => name.length, '用户名不能为空')
 UserSchema.path('hashed_password').validate(pwd => pwd.length, '密码不能为空')
 
-/**
- * Pre-save hook。 用户保存的钩子。 检测虚拟属性 password 是否为空
- */
-
+/** 事件钩子 */
 UserSchema.pre('save', function (next) {
     if (this.isNew) {
         console.log('新用户：', this.username)
@@ -53,32 +43,22 @@ UserSchema.pre('save', function (next) {
     next()
 })
 
-/**
- * Methods
- */
-
+/** 实例方法 */
 UserSchema.methods = {
 
-    
     /**
      * 验证 - 检测密码是否正确
-     *
      * @param {String} 普通的文本（明文）
      * @return {Boolean}
-     * @api public
      */
-
     authenticate(plainText) {
         return this.encryptPassword(plainText) === this.hashed_password
     },
 
     /**
      * 创建 salt
-     *
      * @return {String}
-     * @api public
      */
-
     makeSalt: function () {
         return Math.round((new Date().valueOf() * Math.random())) + ''
     },
@@ -88,9 +68,7 @@ UserSchema.methods = {
      *
      * @param {String} password
      * @return {String}
-     * @api public
      */
-
     encryptPassword: function (password) {
         if (!password) return ''
         try {
@@ -104,19 +82,13 @@ UserSchema.methods = {
     },
 }
 
-/**
- * Statics
- */
-
+/** 静态方法 */
 UserSchema.statics = {
     /**
      * Load
-     *
      * @param {Object} options
      * @param {Function} cb
-     * @api private
      */
-
     load: function (options, cb) {
         options.select = options.select || 'username  _id'
         return this.findOne(options.criteria)

@@ -1,10 +1,3 @@
-// router.post('/api/post', post.create) // 创建
-// router.get('/api/post', post.find) // 获取 
-// router.get('/api/posts', post.findAll) // 获取所有
-// router.put('/api/remove', post.remove ) // 移动到垃圾箱
-// router.delete('/api/clear', post.delete) // 清空垃圾箱
-// router.put('/api/modify', post.modify) // 修改
-
 const post = require('../db/post')
 
 module.exports = {
@@ -32,11 +25,17 @@ module.exports = {
 
     },
     /** 永久删除 */
-    async delete() {
-
+    async delete(ctx) {
+        let query = ctx.query
+        if (!query.id) ctx.throw(400, 'id required') // id or _id
+        let ret = await post.delete(query.id)
+        ctx.body = { data: ret.msg, err: ret.err }
     },
     /** 修改 */
-    async modify() {
-
+    async modify(ctx) {
+        let body = ctx.request.body
+        if (!body.content) ctx.throw(400, 'content required')
+        let ret = await post.mondify(body.content)
+        ctx.body = { data: ret.post, err: ret.err }
     }
 }

@@ -17,7 +17,6 @@ module.exports = (content) => {
     if (!meta) {
         return { err: '文件格式异常' }
     }
-    console.log(meta)
     // meta.id = meta.id || basename // 如果没有id，默认为文件名
     meta.intro = postContent.replace(/(\s|<[^>]+>)+/ig, ' ').substr(0, 56).trim() // 简介
     return { err, post: { ...meta, content: postContent } }

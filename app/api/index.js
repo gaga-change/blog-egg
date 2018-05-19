@@ -24,6 +24,6 @@ router.get('/api/post', post.find) // 获取
 router.get('/api/posts', post.findAll) // 获取所有
 router.put('/api/remove', post.remove ) // 移动到垃圾箱
 router.delete('/api/clear', post.delete) // 清空垃圾箱
-router.put('/api/modify', post.modify) // 修改
+router.put('/api/post', post.modify) // 修改
 
 module.exports = router.routes()

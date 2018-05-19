@@ -22,7 +22,8 @@ const PostSchema = new Schema({
     id: { type: Number, default: 0 }, // 文档ID值
     date: { type: Date, default: Date.now }, // 创建时间
     // state: { type: Number, default: TYPE.PUBLISH }, // 状态 [发布,草稿,私密,移除]
-    intro: { type: String, default: '', trim: true } // 描述
+    intro: { type: String, default: '', trim: true }, // 描述
+    markdown: { type: String, default: '' }, // 源文件内容
 })
 
 // 验证是否存在
@@ -38,9 +39,12 @@ PostSchema.methods = {
 
 /** 静态方法 */
 PostSchema.statics = {
+    _findOne(opt) {
+        return this._findOne(opt.query).select('-markdown')
+    },
     /** 获取所有文章 */
     _findAll() {
-        return this.find({}).select('-content')
+        return this.find({}).select('-content -markdown')
     },
 }
 

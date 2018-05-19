@@ -8,9 +8,20 @@ module.exports = {
      * @param {String} content MD文档文本
      */
     async createPost(content) {
-        let post = new Post(only(parsePost(content), 'content title tags categories id date intro'))
-        await post.save()
-        return { post }
+        let ret = parsePost(content)
+        let post = ret.post
+        if (!post.title) {
+            return { err: '需要一个标题' }
+        } else if (!post.id || !Number(post.id)) {
+            return { err: '需要一个ID' }
+        }
+        let findPost = await Post.findOne({ id: post.id })
+        if (findPost) { // 已存在存储
+            return { err: 'ID冲突' }
+        }
+        let newPost = new Post(only(post, 'content title tags categories id date intro'))
+        await newPost.save()
+        return { post: newPost }
     },
     /**
      * 获取所有文章

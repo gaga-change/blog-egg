@@ -16,5 +16,9 @@
     api.logout = function () {
         return $.get('/api/user/logout')
     }
+    /** 文章创建 */
+    api.postCreate = function (params) {
+        return $.post('/api/post', params)
+    }
     window.api = api
 })(window, $)

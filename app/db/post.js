@@ -44,7 +44,7 @@ module.exports = {
      */
     async findAll() {
         let posts = await Post._findAll()
-        return { posts }
+        return { data: {list: posts} }
     },
     /**
      * 获取指定文章

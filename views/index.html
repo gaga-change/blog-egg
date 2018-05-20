@@ -43,6 +43,9 @@
                             <hr>
                         </a>
                     </div>
+                    {%if admin %}
+                    <a href="/writer?id={{post.id}}">编辑</a>
+                    {% endif %}
                 </li>
                 {% endfor %}
 

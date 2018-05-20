@@ -44,7 +44,7 @@ PostSchema.statics = {
     },
     /** 获取所有文章 */
     _findAll() {
-        return this.find({}).select('-content -markdown')
+        return this.find({}).select('-content -markdown').sort({date: -1})
     },
 }
 

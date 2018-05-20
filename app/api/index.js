@@ -10,13 +10,15 @@ router.get('/test', async (ctx, next) => {
 })
 router.get('/', pages.home) // 主页
 router.get('/archives/:id', pages.detail) // 详情页
+router.get('/login', pages.login) // 登入页
+router.get('/writer', pages.writer) // 编辑页
 
 // ## 用户
 router.get('/api/users', user.findUser) // 获取用户
 router.post('/api/user', user.userSave) // 注册用户
 router.get('/api/user', user.user) // 获取当前登入用户
 router.post('/api/user/login', user.login) // 用户登入
-router.get('/api/user/logout', user.logout) // 用户登入
+router.get('/api/user/logout', user.logout) // 用户退出登入
 
 // ## 文章
 router.post('/api/post', post.create) // 创建

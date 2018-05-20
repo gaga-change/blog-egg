@@ -27,7 +27,7 @@ const CONFIG = {
     renew: false, /** (boolean) renew session when session is nearly expired, so we can always keep user logged in. (default is false)*/
 }
 
-parse() // 解析post目录下的md文件
+// parse() // 解析post目录下的md文件
 const app = module.exports = new Koa()
 app.keys = ['junn secret 4']
 

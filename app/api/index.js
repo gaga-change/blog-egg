@@ -4,6 +4,7 @@ const path = require('path')
 const pages = require('./pages')
 const user = require('./user')
 const post = require('./post')
+const tools = require('./tools')
 
 router.get('/test', async (ctx, next) => {
     ctx.body = 'test'
@@ -27,5 +28,8 @@ router.get('/api/posts', post.findAll) // 获取所有
 router.put('/api/remove', post.remove ) // 移动到垃圾箱
 router.delete('/api/clear', post.delete) // 清空垃圾箱
 router.put('/api/post', post.modify) // 修改
+
+// #工具
+router.get('/api/restore', tools.turnPost) // 文件转存到数据库
 
 module.exports = router.routes()

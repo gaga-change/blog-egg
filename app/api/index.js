@@ -5,7 +5,7 @@ const pages = require('./pages')
 const user = require('./user')
 const post = require('./post')
 const tools = require('./tools')
-
+const admin = tools.admin
 router.get('/test', async (ctx, next) => {
     ctx.body = 'test'
 })
@@ -22,14 +22,14 @@ router.post('/api/user/login', user.login) // 用户登入
 router.get('/api/user/logout', user.logout) // 用户退出登入
 
 // ## 文章
-router.post('/api/post', post.create) // 创建
+router.post('/api/post', admin, post.create) // 创建
 router.get('/api/post', post.find) // 获取 
 router.get('/api/posts', post.findAll) // 获取所有
-router.put('/api/remove', post.remove ) // 移动到垃圾箱
-router.delete('/api/clear', post.delete) // 清空垃圾箱
-router.put('/api/post', post.modify) // 修改
+router.put('/api/remove',admin, post.remove) // 移动到垃圾箱
+router.delete('/api/clear',admin, post.delete) // 清空垃圾箱
+router.put('/api/post', admin, post.modify) // 修改
 
 // #工具
-router.get('/api/restore', tools.turnPost) // 文件转存到数据库
+router.get('/api/restore',admin, tools.turnPost) // 文件转存到数据库
 
 module.exports = router.routes()

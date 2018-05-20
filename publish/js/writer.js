@@ -72,14 +72,21 @@
                 postCreate.text('发布文章...')
                 if (status == CREATE) {
                     api.postCreate({ content: source.val() }).then(function (res) {
+                        if (!res.admin) {
+                            return location.href = '/login'
+                        }
                         if (res.err) {
                             alert(res.err)
                         } else {
+                            status = MODIFY // 状态改为编辑
                             postCreate.text('发布文章')
                         }
                     })
                 } else {
                     api.postModify({ content: source.val() }).then(function (res) {
+                        if (!res.admin) {
+                            return location.href = '/login'
+                        }
                         if (res.err) {
                             alert(res.err)
                         } else {

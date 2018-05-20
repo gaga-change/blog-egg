@@ -5,6 +5,14 @@ const post = require('../db/post')
 
 /** 工具 */
 module.exports = {
+    async admin(ctx, next) {
+        let admin = ctx.session.user
+        if (admin) {
+            next()
+        } else {
+            ctx.body = {admin: false}
+        }
+    },
     /** 把md文件转移到数据库 */
     async turnPost(ctx, next) {
         const postDir = path.resolve(__dirname, '../../post')

@@ -10,7 +10,7 @@ module.exports = {
         // let data = dataFile.getPostList()
         let ret = await post.findAll()
         let data = ret.data
-        await ctx.render('index', { data, blog: blogConfig, admin: u})
+        await ctx.render('index', { data, blog: blogConfig, admin: u })
     },
     /** 详情页 */
     async detail(ctx, next) {
@@ -25,7 +25,7 @@ module.exports = {
         }
         p.tags = p.tags || []
         p.tagsStr = p.tags.join('/')
-        await ctx.render('detail', { post: p, blog: blogConfig, admin: u})
+        await ctx.render('detail', { post: p, blog: blogConfig, admin: u })
     },
     /** 登入页 */
     async login(ctx, next) {
@@ -33,7 +33,7 @@ module.exports = {
         if (user) {
             ctx.response.redirect('/writer')
         } else {
-            await ctx.render('login')
+            await ctx.render('login', { blog: blogConfig })
         }
     },
     /** 编辑页 */
@@ -42,7 +42,7 @@ module.exports = {
         if (!user) {
             ctx.response.redirect('/login')
         } else {
-            await ctx.render('writer')
+            await ctx.render('writer', { blog: blogConfig})
         }
     }
 }

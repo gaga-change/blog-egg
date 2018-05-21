@@ -14,3 +14,4 @@ if (mongodbUsername) {
 mongodbConnectLink = `mongodb://${userpwd}${mongodbHost}:${mongodbPort}/${mongodbCollection}`
 
 exports.link = mongodbConnectLink
+exports.show = mongodbHost + ':' + mongodbPort + '/' + mongodbCollection

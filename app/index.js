@@ -11,8 +11,10 @@ const session = require('koa-session')
 const api = require('./api')
 const render = require('./lib/render')
 const parse = require('./parse')
+const mongoConfig = require('./config/mongo')
 
-mongoose.connect('mongodb://dsh.junn.top:27017/test')
+console.log(mongoConfig.show)
+mongoose.connect(mongoConfig.link)
 const db = mongoose.connection;
 const CONFIG = {
     key: 'koa:sess', /** (string) cookie key (default is koa:sess) */

@@ -10,7 +10,7 @@ module.exports = {
         if (admin) {
             return next()
         } else {
-            return ctx.body = { admin: false }
+            return ctx.body = { login: true }
         }
     },
     /** 把md文件转移到数据库 */

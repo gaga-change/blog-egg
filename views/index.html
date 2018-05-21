@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="http://cdn.junn.top/bootstrap/4.1.1/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="http://cdn.junn.top/bootstrap/4.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/main.css?v={{blog.version}}">
     <title>{{blog.title}}</title>
-    <meta name="description"  content="{{blog.description}}" />
-    <meta name="keywords"  content="{{blog.keywords}}" />
+    <meta name="description" content="{{blog.description}}" />
+    <meta name="keywords" content="{{blog.keywords}}" />
     <link rel="icon" href="https://gaga-change.github.io/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="https://gaga-change.github.io/favicon.ico" type="image/x-icon" />
 </head>
@@ -44,7 +44,8 @@
                         </a>
                     </div>
                     {%if admin %}
-                    <a href="/writer?id={{post.id}}">编辑</a>
+                    <a class="mr-3" href="/writer?id={{post.id}}">编辑</a>
+                    <a href="javascript:void(0)" data-post="{{post.id}}" data-id="deleteBtn">删除</a>
                     {% endif %}
                 </li>
                 {% endfor %}
@@ -53,5 +54,18 @@
         </div>
     </div>
 </body>
+<script src="http://cdn.junn.top/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $('[data-id=deleteBtn]').click(function (e) {
+        var id = $(e.target).attr('data-post')
+        var bol = confirm()
+        if (bol) {
+            $.ajax({ type: 'delete', url: '/api/clear?id=' + id}).then(function (res) {
+                console.log(res)
+                location.href = '/'
+            })
+        }
+    })
+</script>
 
 </html>

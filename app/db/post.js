@@ -36,7 +36,7 @@ module.exports = {
         let key = new String(id + '').length == 24 ? '_id' : 'id'
         let obj = {}
         obj[key] = id
-        let msg = await Post.deleteMany(obj)
+        let msg = await Post.deleteOne(obj)
         return { msg }
     },
     /**

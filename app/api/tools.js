@@ -8,9 +8,9 @@ module.exports = {
     async admin(ctx, next) {
         let admin = ctx.session.user
         if (admin) {
-            next()
+            return next()
         } else {
-            ctx.body = {admin: false}
+            return ctx.body = { admin: false }
         }
     },
     /** 把md文件转移到数据库 */

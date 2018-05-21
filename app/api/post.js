@@ -18,7 +18,7 @@ module.exports = {
     /** 查询所有 */
     async findAll(ctx) {
         let ret = await post.findAll()
-        ctx.body = { data: ret.posts }
+        ctx.body = { data: ret.data }
     },
     /** 移动到垃圾箱 */
     async remove(ctx) {

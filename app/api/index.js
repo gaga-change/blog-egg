@@ -32,4 +32,8 @@ router.put('/api/post', admin, post.modify) // 修改
 // #工具
 router.get('/api/restore',admin, tools.turnPost) // 文件转存到数据库
 
+// 重定向到首页
+router.use(async ctx => {
+    return ctx.response.redirect('/')
+})
 module.exports = router.routes()

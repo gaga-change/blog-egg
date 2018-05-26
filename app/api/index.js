@@ -28,6 +28,7 @@ router.get('/api/posts', post.findAll) // 获取所有
 router.put('/api/remove',admin, post.remove) // 移动到垃圾箱
 router.delete('/api/clear',admin, post.delete) // 清空垃圾箱
 router.put('/api/post', admin, post.modify) // 修改
+router.get('/api/tags', post.tags) // 修改
 
 // #工具
 router.get('/api/restore',admin, tools.turnPost) // 文件转存到数据库

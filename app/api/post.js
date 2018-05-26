@@ -37,5 +37,10 @@ module.exports = {
         if (!body.content) ctx.throw(400, 'content required')
         let ret = await post.mondify(body.content)
         ctx.body = { data: ret.post, err: ret.err }
+    },
+    /** 获取标签 */
+    async tags(ctx) {
+        let ret = await post.tags()
+        ctx.body = ret
     }
 }

@@ -15,6 +15,10 @@ function postFilter(content) {
 }
 
 module.exports = {
+    /** 获取标签&分类目录 */
+    async tags() {
+        return Promise.all([Post.distinct('tags'), Post.distinct('categories')]).then(rets => ({tags: rets[0], categories: rets[1]}))
+    },
     /**
      * 存储新文章
      * @param {String} content MD文档文本

@@ -16,7 +16,7 @@ module.exports = {
     async detail(ctx, next) {
         let u = !!ctx.session.user
         let id = ctx.params.id
-        if (!id) return next()
+        if (!Number(id)) return next()
         let ret = await post.findOne(id)
         let p = ret.post
         // post = post || {meta: {tags: []}}
@@ -25,7 +25,7 @@ module.exports = {
         }
         p.tags = p.tags || []
         p.tagsStr = p.tags.join('/')
-        await ctx.render('detail', { post: p, blog: blogConfig, admin: u })
+        return await ctx.render('detail', { post: p, blog: blogConfig, admin: u })
     },
     /** 登入页 */
     async login(ctx, next) {

@@ -38,6 +38,18 @@ module.exports = {
             menus: ctx.state.menus // 菜单
         })
     },
+    /** 关于 */
+    async about(ctx, next) {
+        let [terms] = await Promise.all([
+            post.terms()
+        ])
+        // console.log()
+        await ctx.render('about', {
+            blog: blogConfig,
+            terms: terms.data, // 侧边栏
+            menus: ctx.state.menus // 菜单
+        })
+    },
     /** 详情页 */
     async detail(ctx, next) {
         let u = !!ctx.session.user

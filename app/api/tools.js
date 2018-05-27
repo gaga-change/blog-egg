@@ -2,13 +2,14 @@
 const path = require('path')
 const fs = require('fs')
 const post = require('../db/post')
-const menuConfig =require('../config/menu')
+const getMenuConfig =require('../config/menu')
 
 /** 工具 */
 module.exports = {
     /** 展示页面中间件 */
     async page(ctx, next) {
         let urlPath = ctx.path
+        let menuConfig = getMenuConfig()
         // 处理菜单 current 状态
         if (urlPath == '/archives') {
             menuConfig[1].current = true

@@ -15,9 +15,19 @@ function postFilter(content) {
 }
 
 module.exports = {
-    /** 获取标签&分类目录 */
-    async tags() {
-        return Promise.all([Post.distinct('tags'), Post.distinct('categories')]).then(rets => ({tags: rets[0], categories: rets[1]}))
+    /** 获取标签&分类目录，附加最近文章 */
+    async terms() {
+        return Promise.all([
+            Post.distinct('tags'), 
+            Post.distinct('categories'),
+            Post._findAll({page: 1, pageSize: 5, select: 'title id'})
+        ]).then(rets => ({
+            data: {
+                tags: rets[0],
+                categories: rets[1],
+                posts: rets[2]
+            }
+        }))
     },
     /**
      * 存储新文章
@@ -48,7 +58,7 @@ module.exports = {
      */
     async findAll() {
         let posts = await Post._findAll()
-        return { data: {list: posts} }
+        return { data: { list: posts } }
     },
     /**
      * 获取指定文章

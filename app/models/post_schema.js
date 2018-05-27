@@ -42,9 +42,21 @@ PostSchema.statics = {
     _findOne(opt) {
         return this._findOne(opt.query).select('-markdown')
     },
-    /** 获取所有文章 */
-    _findAll() {
-        return this.find({}).select('-content -markdown').sort({date: -1})
+    /**
+     * 获取所有文章
+     * {
+     *   page {Number} 页码，从1开始
+     *   pageSize {Number} 页数，默认20
+     *   select {String} 筛选
+     * }
+     */
+    _findAll({page = 1, pageSize = 20, select = '-content -markdown'} = {}) {
+        console.log(page, pageSize, select)
+        return this.find({})
+            .select(select)
+            .sort({ date: -1 })
+            .limit(pageSize)
+            .skip((page - 1) * pageSize)
     },
 }
 

@@ -39,8 +39,8 @@ module.exports = {
         ctx.body = { data: ret.post, err: ret.err }
     },
     /** 获取标签 */
-    async tags(ctx) {
-        let ret = await post.tags()
+    async terms(ctx) {
+        let ret = await post.terms()
         ctx.body = ret
     }
 }

@@ -14,6 +14,7 @@ router.get('/test', async (ctx, next) => {
 })
 
 router.get('/', page, pages.home) // 主页
+router.get('/page/:page', page, pages.home) // 主页
 router.get('/archives/:id', page, pages.detail) // 详情页
 router.get('/login', pages.login) // 登入页
 router.get('/writer', pages.writer) // 编辑页

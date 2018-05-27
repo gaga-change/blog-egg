@@ -55,12 +55,12 @@ module.exports = {
     },
     /** 归档 */
     async archives() {
-        let posts = await Post.find({}).select('title id date').sort({date: -1})
+        let posts = await Post.find({}).select('title id date').sort({ date: -1 })
         let archives = {}
         posts.forEach(item => {
             let key = item.date.getFullYear()
             archives[key] = archives[key] || []
-            archives[key].push(item) 
+            archives[key].push(item)
         })
         return { data: archives }
     },
@@ -68,18 +68,19 @@ module.exports = {
      * 获取所有文章
      */
     async findAll({ page, pageSize, tag, category } = {}) {
+        page = Number(page)
         let criteria = {}
         if (tag) criteria.tags = tag
         if (category) criteria.categories = category
         let [posts, count] = await Promise.all([
-             Post._findAll({
+            Post._findAll({
                 page,
                 pageSize,
                 criteria
             }),
             Post.count(criteria)
         ])
-        return { data: { count, page, pageSize, list: posts } }
+        return { data: { count, page, pageSize, list: posts, pages: Math.ceil(count / pageSize) } }
     },
     /**
      * 获取指定文章

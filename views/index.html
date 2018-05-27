@@ -18,21 +18,28 @@
         </div>
         {% endfor %}
         <nav class="page-navigator">
+            {% if (data.page - 1 > 0)%}
+            <a class="extend prev" rel="prev" href="/page/{{data.page - 1}}">上一页</a>
+            {% endif %} {% if (data.page - 2 > 1)%}
             <a class="page-number" href="/">1</a>
-            <a class="page-number" href="/page/{{2}}">2</a>
-            <a class="page-number" href="/page/{{3}}">2</a>
-            <a class="page-number" href="/page/{{4}}">2</a>
-            <!-- <a class="extend prev" rel="prev" href="/page/5/">上一页</a>
-            <a class="page-number" href="/">1</a>
+            {% endif %} {% if (data.page - 3 > 1)%}
             <span class="space">…</span>
-            <a class="page-number" href="/page/4/">4</a>
-            <a class="page-number" href="/page/5/">5</a>
-            <span class="page-number current">6</span>
-            <a class="page-number" href="/page/7/">7</a>
-            <a class="page-number" href="/page/8/">8</a>
+            {% endif %} {% if (data.page - 2 > 0)%}
+            <a class="page-number" href="/page/{{data.page - 2}}">{{data.page - 2}}</a>
+            {% endif %} {% if (data.page - 1 > 0)%}
+            <a class="page-number" href="/page/{{data.page - 1}}">{{data.page - 1}}</a>
+            {% endif %}
+            <span class="page-number current">{{data.page}}</span>
+            {% if (data.pages >= data.page + 1) %}
+            <a class="page-number" href="/page/{{data.page + 1}}">{{data.page + 1}}</a>
+            {% endif %} {% if (data.pages >= data.page + 2) %}
+            <a class="page-number" href="/page/{{data.page + 2}}">{{data.page + 2}}</a>
+            {% endif %} {% if (data.pages > data.page + 3) %}
             <span class="space">…</span>
-            <a class="page-number" href="/page/21/">21</a>
-            <a class="extend next" rel="next" href="/page/7/">下一页</a> -->
+            {% endif %} {% if (data.pages > data.page + 2) %}
+            <a class="page-number" href="/page/{{data.pages}}">{{data.pages}} </a>{% endif %} {% if (data.pages >= data.page + 1) %}
+            <a class="extend next" rel="next" href="/page/{{data.pages}}">下一页</a>
+            {% endif %}
         </nav>
     </div>
 </div>

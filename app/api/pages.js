@@ -16,13 +16,26 @@ module.exports = {
             post.terms()
         ])
         let data = ret.data
-        console.log(data)
         await ctx.render('index', {
             data,
             blog: blogConfig,
-            terms: terms.data, //
+            terms: terms.data, // 侧边栏
             admin: !!ctx.session.user, // 权限
-            menus: ctx.state.menus
+            menus: ctx.state.menus // 菜单
+        })
+    },
+    /** 归档 */
+    async archives(ctx, next) {
+        let [terms, archives] = await Promise.all([
+            post.terms(),
+            post.archives()
+        ])
+        // console.log()
+        await ctx.render('archives', {
+            data: archives.data,
+            blog: blogConfig,
+            terms: terms.data, // 侧边栏
+            menus: ctx.state.menus // 菜单
         })
     },
     /** 详情页 */

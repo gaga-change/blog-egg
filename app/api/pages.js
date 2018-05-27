@@ -50,7 +50,6 @@ module.exports = {
         let [terms] = await Promise.all([
             post.terms()
         ])
-        // console.log()
         await ctx.render('about', {
             blog: blogConfig,
             terms: terms.data, // 侧边栏
@@ -62,15 +61,15 @@ module.exports = {
         let u = !!ctx.session.user
         let id = ctx.params.id
         if (!Number(id)) return next()
-        let ret = await post.findOne(id)
+        let [ret, terms] = await Promise.all([
+            post.findOne(id),
+            post.terms()
+        ])
         let p = ret.post
-        // post = post || {meta: {tags: []}}
         if (!p) {
             return ctx.response.redirect('/')
         }
-        p.tags = p.tags || []
-        p.tagsStr = p.tags.join('/')
-        return await ctx.render('detail', { post: p, blog: blogConfig, admin: u })
+        return await ctx.render('detail', { post: p, terms: terms.data, blog: blogConfig, admin: u })
     },
     /** 登入页 */
     async login(ctx, next) {

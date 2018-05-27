@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" >
 
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -10,23 +10,22 @@
     <title>{{blog.title}} | {{blog.subhead}}</title>
     <meta name="description" content="{{blog.description}}" />
     <meta name="keywords" content="{{blog.keywords}}" />
-    <link rel="stylesheet" href="//img.junn.top/blog/theme01/css/style.css?v=4.1.2">
-    <link rel="stylesheet" href="//cdn.bootcss.com/normalize/8.0.0/normalize.min.css">
-    <link rel="stylesheet" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css">
-    <link rel="stylesheet" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css">
-    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//img.junn.top/blog/theme01/css/style.css?v={{blog.version}}">
+    <link rel="stylesheet" href="//img.junn.top/lib/normalize/8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="//img.junn.top/lib/pure/pure-min.css">
+    <link rel="stylesheet" href="//img.junn.top/lib/pure/grids-responsive-min.css">
+    <link rel="stylesheet" href="//img.junn.top/lib/font-awesome/4.7.0/css/font-awesome.min.css?v=1">
     <link rel="icon" href="//img.junn.top/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="//img.junn.top/favicon.ico" type="image/x-icon" />
-    <script src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-    <script src="//cdn.bootcss.com/es6-promise/4.1.1/es6-promise.auto.min.js" async></script>
+    <script src="//img.junn.top/lib/jquery/3.3.1/jquery.min.js"></script>
+    <script src="//img.junn.top/lib/es6-promise/4.1.1/es6-promise.auto.min.js" async></script>
 </head>
 
 <body>
     <div class="body_container">
         <div id="header">
             <div class="site-name">
-                <h1 class="hidden">关于</h1>
-                <a id="logo" href="/.">{{blog.title}}</a>
+                <a id="logo" href="/.">{{blog.header}}</a>
                 <p class="description">{{blog.subhead}}</p>
             </div>
             <div id="nav-menu">
@@ -104,12 +103,12 @@
         </div>
         <a class="show" id="rocket" href="#top"></a>
     </div>
-    <script src="//img.junn.top/blog/theme01/js/totop.js?v=4.1.2" async></script>
-    <script src="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.js" async></script>
-    <script src="//img.junn.top/blog/theme01/js/fancybox.js?v=4.1.2" async></script>
-    <link rel="stylesheet" href="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.css">
-    <script src="//img.junn.top/blog/theme01/js/codeblock-resizer.js?v=4.1.2"></script>
-    <script src="//img.junn.top/blog/theme01/js/smartresize.js?v=4.1.2"></script> {% include '../com/_footer.html' %}
+    <script src="//img.junn.top/blog/theme01/js/totop.js?v={{blog.version}}" async></script>
+    <script src="//img.junn.top/lib/fancybox/jquery.fancybox.min.js" async></script>
+    <script src="//img.junn.top/blog/theme01/js/fancybox.js?v={{blog.version}}" async></script>
+    <link rel="stylesheet" href="//img.junn.top/lib/fancybox/jquery.fancybox.min.css">
+    <script src="//img.junn.top/blog/theme01/js/codeblock-resizer.js?v={{blog.version}}"></script>
+    <script src="//img.junn.top/blog/theme01/js/smartresize.js?v={{blog.version}}"></script> {% include '../com/_footer.html' %}
 </body>
 
 </html>

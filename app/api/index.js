@@ -18,6 +18,8 @@ router.get('/page/:page', page, pages.home) // 主页
 router.get('/archives', page, pages.archives) // 归档
 router.get('/about', page, pages.about) // 关于
 router.get('/archives/:id', page, pages.detail) // 详情页
+router.get('/categories/:category', page, pages.archives) // 按分类搜索
+router.get('/tags/:tag', page, pages.archives) // 按标签搜索
 router.get('/login', pages.login) // 登入页
 router.get('/writer', pages.writer) // 编辑页
 

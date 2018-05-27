@@ -7,7 +7,7 @@ module.exports = {
     /** 主页(列表页) */
     async home(ctx, next) {
         let page = ctx.params.page || 1
-        let pageSize = 1
+        let pageSize = 10
         let [ret, terms] = await Promise.all([
             post.findAll({
                 page,
@@ -26,14 +26,21 @@ module.exports = {
     },
     /** 归档 */
     async archives(ctx, next) {
+        let criteria = {}
+        let tag = ctx.params.tag
+        let category = ctx.params.category
+        if (tag) criteria.tags = decodeURI(tag)
+        if (category) criteria.categories = decodeURI(category)
+        let termName = criteria.tags || criteria.categories
         let [terms, archives] = await Promise.all([
             post.terms(),
-            post.archives()
+            post.archives(criteria)
         ])
         // console.log()
         await ctx.render('archives', {
             data: archives.data,
             blog: blogConfig,
+            termName, // 分类目录或标签 名称
             terms: terms.data, // 侧边栏
             menus: ctx.state.menus // 菜单
         })

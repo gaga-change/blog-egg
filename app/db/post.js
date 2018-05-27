@@ -54,8 +54,8 @@ module.exports = {
         return { msg }
     },
     /** 归档 */
-    async archives() {
-        let posts = await Post.find({}).select('title id date').sort({ date: -1 })
+    async archives(criteria = {}) {
+        let posts = await Post.find(criteria).select('title id date').sort({ date: -1 })
         let archives = {}
         posts.forEach(item => {
             let key = item.date.getFullYear()

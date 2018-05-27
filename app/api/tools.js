@@ -11,7 +11,7 @@ module.exports = {
         let urlPath = ctx.path
         let menuConfig = getMenuConfig()
         // 处理菜单 current 状态
-        if (urlPath == '/archives') {
+        if (urlPath == '/archives' || ~urlPath.indexOf('/categories/') || ~urlPath.indexOf('/tags/')) {
             menuConfig[1].current = true
         } else if (urlPath == '/about') {
             menuConfig[2].current = true

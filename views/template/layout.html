@@ -26,22 +26,15 @@
         <div id="header">
             <div class="site-name">
                 <h1 class="hidden">关于</h1>
-                <a id="logo" href="/.">喜欢JS的无名小站</a>
-                <p class="description">严俊东个人博客</p>
+                <a id="logo" href="/.">{{blog.title}}</a>
+                <p class="description">{{blog.subhead}}</p>
             </div>
             <div id="nav-menu">
                 {% for menu in menus %}
                 <a {% if menu.current %} class="current" {% endif %} href="{{menu.path}}">
-                    <!-- <i class="fa fa-home">首页</i> -->
                     {% autoescape false %}{{menu.name}} {% endautoescape %}
                 </a>
                 {% endfor %}
-                <!-- <a href="/archives">
-                    <i class="fa fa-archive">归档</i>
-                </a>
-                <a class="current" href="/about">
-                    <i class="fa fa-user">关于</i>
-                </a> -->
             </div>
         </div>
         <div class="pure-g" id="layout">
@@ -60,7 +53,7 @@
                             <i class="fa fa-folder-o">分类</i>
                         </div>
                         <ul class="category-list">
-                            {% for tag in terms.tags %}
+                            {% for tag in terms.categories %}
                             <li class="category-list-item">
                                 <a class="category-list-link" href="/categories/{{tag}}">{{tag}}</a>
                             </li>
@@ -72,7 +65,7 @@
                             <i class="fa fa-star-o">标签</i>
                         </div>
                         <div class="tagcloud">
-                            {% for category in terms.categories %}
+                            {% for category in terms.tags %}
                             <a href="/tags/{{category}}" style="font-size:15px">{{category}}</a>
                             {% endfor %}
                         </div>

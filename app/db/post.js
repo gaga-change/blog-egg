@@ -18,9 +18,9 @@ module.exports = {
     /** 获取标签&分类目录，附加最近文章 */
     async terms() {
         return Promise.all([
-            Post.distinct('tags'), 
+            Post.distinct('tags'),
             Post.distinct('categories'),
-            Post._findAll({page: 1, pageSize: 5, select: 'title id'})
+            Post._findAll({ page: 1, pageSize: 5, select: 'title id' })
         ]).then(rets => ({
             data: {
                 tags: rets[0],
@@ -53,20 +53,33 @@ module.exports = {
         let msg = await Post.deleteOne(obj)
         return { msg }
     },
+    /** 归档 */
+    async archives() {
+        let posts = await Post.find({}).select('title id date').sort({date: -1})
+        let archives = {}
+        posts.forEach(item => {
+            let key = item.date.getFullYear()
+            archives[key] = archives[key] || []
+            archives[key].push(item) 
+        })
+        return { data: archives }
+    },
     /**
      * 获取所有文章
      */
-    async findAll({page, pageSize, tag, category}) {
+    async findAll({ page, pageSize, tag, category, }) {
         let criteria = {}
         if (tag) criteria.tags = tag
         if (category) criteria.categories = category
-        let posts = await Post._findAll({
-            page, 
-            pageSize,
-            criteria
-        })
-        let count = await Post.count(criteria)
-        return { data: {count, page, pageSize, list: posts} }
+        let [posts, count] = await Promise.all([
+             Post._findAll({
+                page,
+                pageSize,
+                criteria
+            }),
+            Post.count(criteria)
+        ])
+        return { data: { count, page, pageSize, list: posts } }
     },
     /**
      * 获取指定文章

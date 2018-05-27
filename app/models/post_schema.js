@@ -52,7 +52,6 @@ PostSchema.statics = {
      * }
      */
     _findAll({ page = 1, pageSize = 20, select = '-content -markdown', criteria = {} } = {}) {
-        console.log(page, pageSize, select, criteria)
         pageSize = Math.min(30, pageSize)
         return this.find(criteria)
             .select(select)

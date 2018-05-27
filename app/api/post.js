@@ -20,6 +20,10 @@ module.exports = {
         let ret = await post.findAll(only(ctx.query, 'page pageSize tag category'))
         ctx.body = ret
     },
+    /** 归档 */
+    async archives(ctx) {
+        ctx.body = await post.archives()
+    },
     /** 移动到垃圾箱 */
     async remove(ctx) {
 

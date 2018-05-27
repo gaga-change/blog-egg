@@ -29,6 +29,7 @@ router.put('/api/remove',admin, post.remove) // 移动到垃圾箱
 router.delete('/api/clear',admin, post.delete) // 清空垃圾箱
 router.put('/api/post', admin, post.modify) // 修改
 router.get('/api/terms', post.terms) // 标签、分类，附加最近文章
+router.get('/api/archives', post.archives) // 标签、分类，附加最近文章
 
 // #工具
 router.get('/api/restore',admin, tools.turnPost) // 文件转存到数据库

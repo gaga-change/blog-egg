@@ -57,11 +57,16 @@ module.exports = {
      * 获取所有文章
      */
     async findAll({page, pageSize, tag, category}) {
+        let criteria = {}
+        if (tag) criteria.tags = tag
+        if (category) criteria.categories = category
         let posts = await Post._findAll({
             page, 
-            pageSize
+            pageSize,
+            criteria
         })
-        return { data: { list: posts } }
+        let count = await Post.count(criteria)
+        return { data: {count, page, pageSize, list: posts} }
     },
     /**
      * 获取指定文章

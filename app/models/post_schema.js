@@ -45,15 +45,16 @@ PostSchema.statics = {
     /**
      * 获取所有文章
      * {
-     *   page {Number} 页码，从1开始
+     *   page {Number} 页码，默认1
      *   pageSize {Number} 页数，默认20
-     *   select {String} 筛选
+     *   select {String} 筛选，默认 '-content -markdown'
+     *   criteria {Object} 条件，默认 {}
      * }
      */
-    _findAll({page = 1, pageSize = 20, select = '-content -markdown'} = {}) {
-        console.log(page, pageSize, select)
+    _findAll({ page = 1, pageSize = 20, select = '-content -markdown', criteria = {} } = {}) {
+        console.log(page, pageSize, select, criteria)
         pageSize = Math.min(30, pageSize)
-        return this.find({})
+        return this.find(criteria)
             .select(select)
             .sort({ date: -1 })
             .limit(pageSize)

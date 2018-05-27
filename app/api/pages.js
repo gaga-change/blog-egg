@@ -6,11 +6,18 @@ const post = require('../db/post')
 module.exports = {
     /** 主页 */
     async home(ctx, next) {
-        let u = !!ctx.session.user
-        // let data = dataFile.getPostList()
-        let ret = await post.findAll()
+        let [ret, terms] = await Promise.all([
+            post.findAll(),
+            post.terms()
+        ])
         let data = ret.data
-        await ctx.render('index', { data, blog: blogConfig, admin: u })
+        await ctx.render('index', {
+            data,
+            blog: blogConfig,
+            terms: terms.data, //
+            admin: !!ctx.session.user, // 权限
+            menus: ctx.state.menus
+        })
     },
     /** 详情页 */
     async detail(ctx, next) {
@@ -42,7 +49,7 @@ module.exports = {
         if (!user) {
             ctx.response.redirect('/login')
         } else {
-            await ctx.render('writer', { blog: blogConfig})
+            await ctx.render('writer', { blog: blogConfig })
         }
     }
 }

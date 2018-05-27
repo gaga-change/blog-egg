@@ -1,78 +1,39 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="http://cdn.junn.top/bootstrap/4.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/main.css?v={{blog.version}}">
-    <title>{{blog.title}} | {{blog.subhead}}</title>
-    <meta name="description" content="{{blog.description}}" />
-    <meta name="keywords" content="{{blog.keywords}}" />
-    <link rel="icon" href="https://gaga-change.github.io/favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="https://gaga-change.github.io/favicon.ico" type="image/x-icon" />
-</head>
-
-<body>
-    <!-- 总体 -->
-    <div class="container">
-        <!-- 头部 -->
-        <header class="row">
-            <nav class="col">
-                <ul class="header-menu nav justify-content-center">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">首页</a>
-                        <!-- <a class="nav-link" href="/">首页</a> -->
-                    </li>
-                </ul>
-            </nav>
-        </header>
-        <!-- 列表 -->
-        <div class="row">
-            <ul class="col">
-                {% for post in data.list %}
-                <li class="media">
-                    <div class="media-body post-item" style="position: relative;">
-                        <a href="/archives/{{post.id}}">
-                            <h5 class="mt-0">{{post.title}}</h5>
-                            <i class="itme">{{ post.date|date('Y-m-d') }}</i>
-                            <p>
-                                {{post.intro}}...
-                            </p>
-                            <hr>
-                        </a>
-                    </div>
-                    {%if admin %}
-                    <a class="mr-3" href="/writer?id={{post.id}}">编辑</a>
-                    <a href="javascript:void(0)" data-post="{{post.id}}" data-title="{{post.title}}" data-id="deleteBtn">删除</a>
-                    {% endif %}
-                </li>
-                {% endfor %}
-
-            </ul>
+{% extends './template/layout.html' %} {% block content %}
+<div class="pure-u-1 pure-u-md-3-4">
+    <div class="content_container">
+        {% for post in data.list %}
+        <div class="post">
+            <h1 class="post-title">
+                <a href="/archives/{{post.id}}">{{post.title}}</a>
+            </h1>
+            <div class="post-meta">{{ post.date|date('Y年m月d日') }}</div>
+            <div class="post-content">{{post.intro}}...。</div>
+            <p class="readmore">
+                <a href="/archives/{{post.id}}">阅读全文</a>
+            </p>
+            {%if admin %}
+            <a class="mr-3" href="/writer?id={{post.id}}">编辑</a>
+            <a href="javascript:void(0)" data-post="{{post.id}}" data-title="{{post.title}}" data-id="deleteBtn">删除</a>
+            {% endif %}
         </div>
+        {% endfor %}
+        <nav class="page-navigator">
+            <a class="page-number" href="/">1</a>
+            <a class="page-number" href="/page/{{2}}">2</a>
+            <a class="page-number" href="/page/{{3}}">2</a>
+            <a class="page-number" href="/page/{{4}}">2</a>
+            <!-- <a class="extend prev" rel="prev" href="/page/5/">上一页</a>
+            <a class="page-number" href="/">1</a>
+            <span class="space">…</span>
+            <a class="page-number" href="/page/4/">4</a>
+            <a class="page-number" href="/page/5/">5</a>
+            <span class="page-number current">6</span>
+            <a class="page-number" href="/page/7/">7</a>
+            <a class="page-number" href="/page/8/">8</a>
+            <span class="space">…</span>
+            <a class="page-number" href="/page/21/">21</a>
+            <a class="extend next" rel="next" href="/page/7/">下一页</a> -->
+        </nav>
     </div>
-</body>
-<script src="http://cdn.junn.top/jquery/3.3.1/jquery.min.js"></script>
-<script>
-    $('[data-id=deleteBtn]').click(function (e) {
-        var id = $(e.target).attr('data-post')
-        var title = $(e.target).attr('data-title')
-        var bol = confirm('确定删除该文章:' + title)
-        if (bol) {
-            $.ajax({ type: 'delete', url: '/api/clear?id=' + id }).then(function (res) {
-                if (res.login) {
-                    return location.href = '/login'
-                }
-                if (res.err) {
-                    alert(res.err)
-                } else {
-                    location.href = '/'
-                }
-            })
-        }
-    })
-</script>
-{% include './com/_footer.html' %}
-</html>
+</div>
+{% endblock %}

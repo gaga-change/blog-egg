@@ -67,7 +67,7 @@ module.exports = {
     /**
      * 获取所有文章
      */
-    async findAll({ page, pageSize, tag, category, }) {
+    async findAll({ page, pageSize, tag, category } = {}) {
         let criteria = {}
         if (tag) criteria.tags = tag
         if (category) criteria.categories = category

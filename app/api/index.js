@@ -5,12 +5,16 @@ const pages = require('./pages')
 const user = require('./user')
 const post = require('./post')
 const tools = require('./tools')
-const admin = tools.admin
+
+const admin = tools.admin // 权限校验
+const page = tools.page // 展示页面中间件
+
 router.get('/test', async (ctx, next) => {
     ctx.body = 'test'
 })
-router.get('/', pages.home) // 主页
-router.get('/archives/:id', pages.detail) // 详情页
+
+router.get('/', page, pages.home) // 主页
+router.get('/archives/:id', page, pages.detail) // 详情页
 router.get('/login', pages.login) // 登入页
 router.get('/writer', pages.writer) // 编辑页
 
@@ -25,14 +29,14 @@ router.get('/api/user/logout', user.logout) // 用户退出登入
 router.post('/api/post', admin, post.create) // 创建
 router.get('/api/post', post.find) // 获取 
 router.get('/api/posts', post.findAll) // 获取所有
-router.put('/api/remove',admin, post.remove) // 移动到垃圾箱
-router.delete('/api/clear',admin, post.delete) // 清空垃圾箱
+router.put('/api/remove', admin, post.remove) // 移动到垃圾箱
+router.delete('/api/clear', admin, post.delete) // 清空垃圾箱
 router.put('/api/post', admin, post.modify) // 修改
 router.get('/api/terms', post.terms) // 标签、分类，附加最近文章
 router.get('/api/archives', post.archives) // 标签、分类，附加最近文章
 
 // #工具
-router.get('/api/restore',admin, tools.turnPost) // 文件转存到数据库
+router.get('/api/restore', admin, tools.turnPost) // 文件转存到数据库
 
 // 重定向到首页
 router.use(async ctx => {

@@ -56,8 +56,11 @@ module.exports = {
     /**
      * 获取所有文章
      */
-    async findAll() {
-        let posts = await Post._findAll()
+    async findAll({page, pageSize, tag, category}) {
+        let posts = await Post._findAll({
+            page, 
+            pageSize
+        })
         return { data: { list: posts } }
     },
     /**

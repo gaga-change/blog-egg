@@ -52,6 +52,7 @@ PostSchema.statics = {
      */
     _findAll({page = 1, pageSize = 20, select = '-content -markdown'} = {}) {
         console.log(page, pageSize, select)
+        pageSize = Math.min(30, pageSize)
         return this.find({})
             .select(select)
             .sort({ date: -1 })

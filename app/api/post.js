@@ -1,5 +1,5 @@
 const post = require('../db/post')
-
+const only = require('only')
 module.exports = {
     /** 创建 */
     async create(ctx) {
@@ -17,8 +17,8 @@ module.exports = {
     },
     /** 查询所有 */
     async findAll(ctx) {
-        let ret = await post.findAll()
-        ctx.body = { data: ret.data }
+        let ret = await post.findAll(only(ctx.query, 'page pageSize tag category'))
+        ctx.body = ret
     },
     /** 移动到垃圾箱 */
     async remove(ctx) {
@@ -33,6 +33,7 @@ module.exports = {
     },
     /** 修改 */
     async modify(ctx) {
+        let query = ctx.query
         let body = ctx.request.body
         if (!body.content) ctx.throw(400, 'content required')
         let ret = await post.mondify(body.content)

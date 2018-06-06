@@ -39,12 +39,13 @@ app.use(logger()) // 日志
 app.use(staticCache(path.resolve(__dirname, '../publish'), {
     maxAge: 365 * 24 * 60 * 60,
     gzip: true,
+    dynamic: true
 }))
 // json资源
-app.use(mount('/json', staticCache(path.resolve(__dirname, '../json'), {
-    maxAge: 365 * 24 * 60 * 60,
-    gzip: true,
-})))
+// app.use(mount('/json', staticCache(path.resolve(__dirname, '../json'), {
+//     maxAge: 365 * 24 * 60 * 60,
+//     gzip: true,
+// })))
 
 app.use(render) // 模板引擎
 app.use(session(CONFIG, app)) // session

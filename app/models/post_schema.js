@@ -37,6 +37,14 @@ PostSchema.methods = {
 
 }
 
+/** 存储钩子 */
+PostSchema.pre('save', function (next) {
+    if (!this.created) this.created = new Date
+    console.log(this.tags)
+    next()
+})
+
+
 /** 静态方法 */
 PostSchema.statics = {
     _findOne(opt) {

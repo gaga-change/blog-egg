@@ -37,26 +37,22 @@ module.exports = {
     async createPost(obj, params) {
         try {
             let postObj = new Post(obj)
-            postObj.id = ++params.value.id
-            postObj.content = md.render(postObj.markdown)
-            // let ret = postFilter(content)
-            // if (ret.err) return { err: ret.err }
-            // let post = ret.post
-            // let findPost = await Post.findOne({ id: post.id })
-            // if (findPost) { // 已存在文章
-            //     return { err: 'ID冲突' }
-            // }
-            // post.markdown = content // 源文档存储
-            // let newPost = new Post(only(post, 'content title tags categories id date intro markdown'))
-            // await newPost.save()
-            // return { post: only(newPost, 'title tags categories id date intro') }
+            postObj.id = ++params.value.id // 手动附上ID值
+            postObj.content = md.render(postObj.markdown) // 解析 markdown
+            if (!postObj.intro && postObj.content) { // 自动附加简介
+                postObj.intro = postObj.content.replace(/(\s|<[^>]+>)+/ig, ' ').substr(0, 56).trim() // 简介
+            }
             postObj = await postObj.save()
-            params.markModified('value')
-            return { data: postObj, params }
+            params.markModified('value') // 更新配置信息
+            return { data: postObj }
         } catch (err) {
             return { err }
         }
     },
+    /**
+     * 根据ID删除文章
+     * @param {String} id 
+     */
     async delete(id) {
         let key = new String(id + '').length == 24 ? '_id' : 'id'
         let obj = {}

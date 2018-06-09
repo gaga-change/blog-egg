@@ -23,8 +23,6 @@ router.get('/tags/:tag', page, pages.archives) // 按标签搜索
 router.get('/login', pages.login) // 登入页
 router.get('/writer', pages.writer) // 编辑页
 
-router.get('/api/test', tools.params)
-
 // ## 用户
 router.get('/api/users', user.findUser) // 获取用户
 router.post('/api/user', user.userSave) // 注册用户

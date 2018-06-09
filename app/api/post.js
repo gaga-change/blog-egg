@@ -5,7 +5,6 @@ module.exports = {
     async create(ctx) {
         let body = ctx.request.body
         if (!body.title) ctx.throw(400, 'title required')
-        console.log('--', Date.now())
         ctx.body = await post.createPost(
             only(body, 'title categories tags date markdown intro'), 
             ctx.state.postParams

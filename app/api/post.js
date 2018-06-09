@@ -22,7 +22,7 @@ module.exports = {
         if (post) {
             ctx.body = { data: post }
         } else {
-            ctx.body = { err: '没有改文章' }
+            ctx.body = { err: '没有该文章' }
         }
     },
     /** 查询所有 */
@@ -34,12 +34,15 @@ module.exports = {
     async archives(ctx) {
         ctx.body = await post.archives()
     },
-    /** 永久删除 */
+    /** 删除文章 */
     async delete(ctx) {
-        let query = ctx.query
-        if (!query.id) ctx.throw(400, 'id required') // id or _id
-        let ret = await post.delete(query.id)
-        ctx.body = { data: ret.msg, err: ret.err }
+        let post = ctx.state.post
+        if (post) {
+            let msg = await post.remove()
+            ctx.body = {msg}
+        } else {
+            ctx.body = { err: '没有该文章' }
+        }
     },
     /** 修改 */
     async modify(ctx) {

@@ -31,11 +31,13 @@ router.post('/api/user/login', user.login) // 用户登入
 router.get('/api/user/logout', user.logout) // 用户退出登入
 
 // ## 文章
-router.post('/api/posts', admin, tools.params, post.create) // 创建
-router.get('/api/posts/:id',post.bind, post.find) // 获取 
+router.get('/api/posts/:id', post.bind, post.find) // 获取指定ID文章
 router.get('/api/posts', post.findAll) // 获取所有
-router.delete('/api/clear', admin, post.delete) // 清空垃圾箱
-router.put('/api/post', admin, post.modify) // 修改
+router.post('/api/posts', admin, tools.params, post.create) // 创建
+router.delete('/api/posts/:id', admin, post.bind, post.delete) // 删除文章
+router.put('/api/posts/:id', admin, post.bind, post.modify) // 修改
+
+// ## 其它
 router.get('/api/terms', post.terms) // 标签、分类，附加最近文章
 router.get('/api/archives', post.archives) // 标签、分类，附加最近文章
 

@@ -1,21 +1,29 @@
 const post = require('../db/post')
 const only = require('only')
 module.exports = {
+    /** 根据url参数中的ID获取文章 */
+    async bind(ctx, next) {
+        let id = ctx.params.id
+        ctx.state.post = await post.findById(id)
+        await next()
+    },
     /** 创建 */
     async create(ctx) {
         let body = ctx.request.body
         if (!body.title) ctx.throw(400, 'title required')
         ctx.body = await post.createPost(
-            only(body, 'title categories tags date markdown intro'), 
+            only(body, 'title categories tags date markdown intro'),
             ctx.state.postParams
         )
     },
-    /** 查询 */
+    /** 查询指定文章 */
     async find(ctx) {
-        let query = ctx.query
-        if (!query.id) ctx.throw(400, 'id required') // id or _id
-        let ret = await post.findOne(query.id)
-        ctx.body = { data: ret.post, err: ret.err }
+        let post = ctx.state.post
+        if (post) {
+            ctx.body = { data: post }
+        } else {
+            ctx.body = { err: '没有改文章' }
+        }
     },
     /** 查询所有 */
     async findAll(ctx) {

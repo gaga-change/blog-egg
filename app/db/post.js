@@ -16,6 +16,13 @@ function postFilter(content) {
 }
 
 module.exports = {
+    /**
+     * 根据ID获取文章
+     * @param {String} id 
+     */
+    async findById(id) {
+        return await Post.findOne({id})
+    },
     /** 获取标签&分类目录，附加最近文章 */
     async terms() {
         return Promise.all([

@@ -2,8 +2,9 @@
 const path = require('path')
 const fs = require('fs')
 const post = require('../db/post')
-const getMenuConfig =require('../config/menu')
-
+const getMenuConfig = require('../config/menu')
+const ParamsSchema = require('../models/params_schema')
+const paramsInit = require('../parse/params_init')
 /** 工具 */
 module.exports = {
     /** 展示页面中间件 */
@@ -29,6 +30,17 @@ module.exports = {
         } else {
             return ctx.body = { login: true }
         }
+    },
+    /** 获取配置信息 */
+    async params(ctx, next) {
+        let obj = await ParamsSchema.findOne({name: 'post'}) // 获取post相关信息
+        if (!obj) {
+            obj = await paramsInit.postInit()
+        }
+        ctx.state.postParams = obj // 绑定到上下文
+        await next().then(async () => {
+            await obj.save()
+        })
     },
     /** 把md文件转移到数据库 */
     async turnPost(ctx, next) {

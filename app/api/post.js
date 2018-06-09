@@ -4,9 +4,12 @@ module.exports = {
     /** 创建 */
     async create(ctx) {
         let body = ctx.request.body
-        if (!body.content) ctx.throw(400, 'content required')
-        let ret = await post.createPost(body.content)
-        ctx.body = { data: ret.post, err: ret.err }
+        if (!body.title) ctx.throw(400, 'title required')
+        console.log('--', Date.now())
+        ctx.body = await post.createPost(
+            only(body, 'title categories tags date markdown intro'), 
+            ctx.state.postParams
+        )
     },
     /** 查询 */
     async find(ctx) {
@@ -23,10 +26,6 @@ module.exports = {
     /** 归档 */
     async archives(ctx) {
         ctx.body = await post.archives()
-    },
-    /** 移动到垃圾箱 */
-    async remove(ctx) {
-
     },
     /** 永久删除 */
     async delete(ctx) {

@@ -23,6 +23,8 @@ router.get('/tags/:tag', page, pages.archives) // 按标签搜索
 router.get('/login', pages.login) // 登入页
 router.get('/writer', pages.writer) // 编辑页
 
+router.get('/api/test', tools.params)
+
 // ## 用户
 router.get('/api/users', user.findUser) // 获取用户
 router.post('/api/user', user.userSave) // 注册用户
@@ -31,10 +33,9 @@ router.post('/api/user/login', user.login) // 用户登入
 router.get('/api/user/logout', user.logout) // 用户退出登入
 
 // ## 文章
-router.post('/api/post', admin, post.create) // 创建
+router.post('/api/posts', admin, tools.params, post.create) // 创建
 router.get('/api/post', post.find) // 获取 
 router.get('/api/posts', post.findAll) // 获取所有
-router.put('/api/remove', admin, post.remove) // 移动到垃圾箱
 router.delete('/api/clear', admin, post.delete) // 清空垃圾箱
 router.put('/api/post', admin, post.modify) // 修改
 router.get('/api/terms', post.terms) // 标签、分类，附加最近文章

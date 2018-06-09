@@ -1,6 +1,7 @@
 const only = require('only')
 const Post = require('../models/post_schema')
 const parsePost = require('../lib/parse_post')
+const md = require('markdown-it')()
 
 function postFilter(content) {
     let ret = parsePost(content)
@@ -33,18 +34,28 @@ module.exports = {
      * 存储新文章
      * @param {String} content MD文档文本
      */
-    async createPost(content) {
-        let ret = postFilter(content)
-        if (ret.err) return { err: ret.err }
-        let post = ret.post
-        let findPost = await Post.findOne({ id: post.id })
-        if (findPost) { // 已存在文章
-            return { err: 'ID冲突' }
+    async createPost(obj, params) {
+        try {
+            let postObj = new Post(obj)
+            postObj.id = ++params.value.id
+            postObj.content = md.render(postObj.markdown)
+            // let ret = postFilter(content)
+            // if (ret.err) return { err: ret.err }
+            // let post = ret.post
+            // let findPost = await Post.findOne({ id: post.id })
+            // if (findPost) { // 已存在文章
+            //     return { err: 'ID冲突' }
+            // }
+            // post.markdown = content // 源文档存储
+            // let newPost = new Post(only(post, 'content title tags categories id date intro markdown'))
+            // await newPost.save()
+            // return { post: only(newPost, 'title tags categories id date intro') }
+            postObj = await postObj.save()
+            params.markModified('value')
+            return { data: postObj, params }
+        } catch (err) {
+            return { err }
         }
-        post.markdown = content // 源文档存储
-        let newPost = new Post(only(post, 'content title tags categories id date intro markdown'))
-        await newPost.save()
-        return { post: only(newPost, 'title tags categories id date intro') }
     },
     async delete(id) {
         let key = new String(id + '').length == 24 ? '_id' : 'id'

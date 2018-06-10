@@ -44,13 +44,13 @@ module.exports = {
     async createPost(obj, params) {
         try {
             let postObj = new Post(obj)
-            postObj.id = ++params.value.id // 手动附上ID值
+            postObj.id = Number(params.value.get('id')) + 1 // 手动附上ID值
             postObj.content = md.render(postObj.markdown) // 解析 markdown
             if (!postObj.intro && postObj.content) { // 自动附加简介
                 postObj.intro = postObj.content.replace(/(\s|<[^>]+>)+/ig, ' ').substr(0, 56).trim() // 简介
             }
             postObj = await postObj.save()
-            params.markModified('value') // 更新配置信息
+            params.value.set('id', postObj.id) // 更新配置信息
             return { data: postObj }
         } catch (err) {
             return { err }

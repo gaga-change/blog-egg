@@ -1,6 +1,4 @@
 
-const dataFile = require('../db/dataFile')
-const blogConfig = require('../config/blog')
 const post = require('../db/post')
 
 module.exports = {
@@ -18,7 +16,7 @@ module.exports = {
         let data = ret.data
         await ctx.render('index', {
             data,
-            blog: blogConfig,
+            blog: ctx.state.site,
             terms: terms.data, // 侧边栏
             admin: !!ctx.session.user, // 权限
             menus: ctx.state.menus // 菜单
@@ -26,22 +24,22 @@ module.exports = {
     },
     /** 归档 */
     async archives(ctx, next) {
-        const config = Object.create(blogConfig)
-        config.title = '归档'
+        let title = '归档'
         let criteria = {}
         let tag = ctx.params.tag
         let category = ctx.params.category
         if (tag) criteria.tags = decodeURI(tag)
         if (category) criteria.categories = decodeURI(category)
-        if (tag || category) config.title = tag || category
+        if (tag || category) title = tag || category
         let termName = criteria.tags || criteria.categories
         let [terms, archives] = await Promise.all([
             post.terms(),
             post.archives(criteria)
         ])
         await ctx.render('archives', {
+            title, // 标题
             data: archives.data,
-            blog: config,
+            blog: ctx.state.site,
             termName, // 分类目录或标签 名称
             terms: terms.data, // 侧边栏
             menus: ctx.state.menus // 菜单
@@ -49,20 +47,19 @@ module.exports = {
     },
     /** 关于 */
     async about(ctx, next) {
-        const config = Object.create(blogConfig)
-        config.title = '关于'
+        let title = '关于'
         let [terms] = await Promise.all([
             post.terms()
         ])
         await ctx.render('about', {
-            blog: config,
+            title,
+            blog: ctx.state.site,
             terms: terms.data, // 侧边栏
             menus: ctx.state.menus // 菜单
         })
     },
     /** 详情页 */
     async detail(ctx, next) {
-        const config = Object.create(blogConfig)
         let u = !!ctx.session.user
         let id = ctx.params.id
         if (!Number(id)) return next()
@@ -74,8 +71,14 @@ module.exports = {
         if (!p) {
             return ctx.response.redirect('/')
         }
-        config.title = p.title
-        return await ctx.render('detail', { post: p, terms: terms.data, blog: config, admin: u })
+        let title = p.title
+        return await ctx.render('detail', {
+            title,
+            post: p,
+            terms: terms.data,
+            blog: ctx.state.site,
+            admin: u
+        })
     },
     /** 登入页 */
     async login(ctx, next) {
@@ -83,7 +86,9 @@ module.exports = {
         if (user) {
             ctx.response.redirect('/writer')
         } else {
-            await ctx.render('login', { blog: blogConfig })
+            await ctx.render('login', {
+                blog: ctx.state.site,
+            })
         }
     },
     /** 编辑页 */
@@ -92,7 +97,9 @@ module.exports = {
         if (!user) {
             ctx.response.redirect('/login')
         } else {
-            await ctx.render('writer', { blog: blogConfig })
+            await ctx.render('writer', {
+                blog: ctx.state.site,
+            })
         }
     }
 }

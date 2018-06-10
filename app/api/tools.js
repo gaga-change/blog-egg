@@ -20,6 +20,15 @@ module.exports = {
             menuConfig[0].current = true
         }
         ctx.state.menus = menuConfig
+        let siteParams = await ParamsSchema.findOne({ name: 'site' }) // 获取站点相关信息
+        if (!siteParams) {
+            siteParams = await paramsInit.siteInit()
+        }
+        let obj = Object.create(null);
+        for (let [k, v] of siteParams.value) {
+            obj[k] = v;
+        }
+        ctx.state.site = obj // 绑定到上下文
         return next()
     },
     /** 权限校验 */
@@ -33,7 +42,7 @@ module.exports = {
     },
     /** 获取配置信息 */
     async params(ctx, next) {
-        let obj = await ParamsSchema.findOne({name: 'post'}) // 获取post相关信息
+        let obj = await ParamsSchema.findOne({ name: 'post' }) // 获取post相关信息
         if (!obj) {
             obj = await paramsInit.postInit()
         }

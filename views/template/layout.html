@@ -7,7 +7,7 @@
     <meta content="yes" name="apple-mobile-web-app-capable">
     <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style">
     <meta content="telephone=no" name="format-detection">
-    <title>{{blog.title}} | {{blog.subhead}}</title>
+    <title>{{title || blog.header}} | {{blog.subhead}}</title>
     <meta name="description" content="{{blog.description}}" />
     <meta name="keywords" content="{{blog.keywords}}" />
     <link rel="stylesheet" href="//img.junn.top/blog/theme01/css/style.css?v={{blog.version}}">
@@ -30,7 +30,7 @@
             </div>
             <div id="nav-menu">
                 {% for menu in menus %}
-                <a {% if menu.current %} class="current" {% endif %} href="{{menu.path}}">
+                <a  href="{{menu.path}}" {% if menu.current %} class="current" {% endif %}>
                     {% autoescape false %}{{menu.name}} {% endautoescape %}
                 </a>
                 {% endfor %}

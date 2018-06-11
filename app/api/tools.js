@@ -4,7 +4,7 @@ const fs = require('fs')
 const post = require('../db/post')
 const getMenuConfig = require('../config/menu')
 const ParamsSchema = require('../models/params_schema')
-const paramsInit = require('../parse/params_init')
+const paramsInit = require('../lib/params_init')
 /** 工具 */
 module.exports = {
     /** 展示页面中间件 */

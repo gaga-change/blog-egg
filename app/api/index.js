@@ -9,10 +9,6 @@ const tools = require('./tools')
 const admin = tools.admin // 权限校验
 const page = tools.page // 展示页面中间件
 
-router.get('/test', async (ctx, next) => {
-    ctx.body = 'test'
-})
-
 router.get('/', page, pages.home) // 主页
 router.get('/page/:page', page, pages.home) // 主页
 router.get('/archives', page, pages.archives) // 归档
@@ -20,8 +16,6 @@ router.get('/about', page, pages.about) // 关于
 router.get('/archives/:id', page, pages.detail) // 详情页
 router.get('/categories/:category', page, pages.archives) // 按分类搜索
 router.get('/tags/:tag', page, pages.archives) // 按标签搜索
-router.get('/login', pages.login) // 登入页
-router.get('/writer', pages.writer) // 编辑页
 
 // ## 用户
 router.get('/api/users', user.findUser) // 获取用户

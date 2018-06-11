@@ -79,27 +79,5 @@ module.exports = {
             blog: ctx.state.site,
             admin: u
         })
-    },
-    /** 登入页 */
-    async login(ctx, next) {
-        let user = ctx.session.user
-        if (user) {
-            ctx.response.redirect('/writer')
-        } else {
-            await ctx.render('login', {
-                blog: ctx.state.site,
-            })
-        }
-    },
-    /** 编辑页 */
-    async writer(ctx, next) {
-        let user = ctx.session.user
-        if (!user) {
-            ctx.response.redirect('/login')
-        } else {
-            await ctx.render('writer', {
-                blog: ctx.state.site,
-            })
-        }
     }
 }

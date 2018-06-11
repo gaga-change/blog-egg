@@ -1,19 +1,6 @@
 const only = require('only')
 const Post = require('../models/post_schema')
-const parsePost = require('../lib/parse_post')
 const md = require('markdown-it')()
-
-function postFilter(content) {
-    let ret = parsePost(content)
-    if (ret.err) return ret
-    let post = ret.post
-    if (!post.title) {
-        ret.err = '需要一个标题'
-    } else if (!post.id || !Number(post.id)) {
-        ret.err = '需要一个ID'
-    }
-    return ret
-}
 
 module.exports = {
     /**
@@ -106,25 +93,5 @@ module.exports = {
         obj[key] = id
         let post = await Post.findOne(obj)
         return { post }
-    },
-    /**
-     * 修改文章
-     * @param {String} content MD格式文本
-     */
-    async mondify(content) {
-        let ret = postFilter(content)
-        if (ret.err) return { err: ret.err }
-        let post = ret.post
-        let findPost = await Post.findOne({ id: post.id })
-        if (!findPost) { // 文章不存在
-            return { err: '文章不存在' }
-        }
-        Object.keys(post).forEach(key => {
-            if (findPost[key]) {
-                findPost[key] = post[key]
-            }
-        })
-        await findPost.save()
-        return { post: only(findPost, 'title tags categories id date intro') }
     }
 }

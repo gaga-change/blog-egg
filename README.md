@@ -3,7 +3,8 @@
 > 基于Node.js环境。koa + mongodb 搭建的博客系统。
 
 [点此查看运行效果 - 前台](http://blog.junn.top)
-[点此查看运行效果 - 后台](http://blog.junn.top/admin)
+
+[点此查看运行效果 - 后台](http://blog.junn.top/admin/login)
 
 博客系统API & 前台页面: 当前仓库
 

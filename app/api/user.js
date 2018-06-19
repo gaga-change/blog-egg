@@ -17,8 +17,8 @@ exports.userSave = async (ctx, next) => {
     if (!body.username) ctx.throw(400, 'username required')
     if (!body.password) ctx.throw(400, 'password required')
     let users = await user.findALl()
-    if (users.length > 1) {
-        return ctx.body = {err: '已存在管理员，未开放多用户模式'}
+    if (users.length > 0) {
+        return ctx.body = {err: '已存在管理员，暂未开放多用户模式'}
     }    
     let ret = await user.userCreate(body.username, body.password)
     ctx.session.user = ret.user

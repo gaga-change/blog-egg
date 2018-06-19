@@ -1,4 +1,3 @@
-const only = require('only')
 const Post = require('../models/post_schema')
 const md = require('markdown-it')()
 

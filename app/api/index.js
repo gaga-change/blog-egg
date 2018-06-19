@@ -1,10 +1,9 @@
 const router = require('koa-router')()
-const fs = require('fs')
-const path = require('path')
 const pages = require('./pages')
 const user = require('./user')
 const post = require('./post')
 const tools = require('./tools')
+const params = require('./params')
 
 const admin = tools.admin // 权限校验
 const page = tools.page // 展示页面中间件
@@ -31,15 +30,17 @@ router.post('/api/posts', admin, tools.params, post.create) // 创建
 router.delete('/api/posts/:id', admin, post.bind, post.delete) // 删除文章
 router.put('/api/posts/:id', admin, post.bind, post.modify) // 修改
 
+// ## 站点信息
+router.get('/api/site', params.getSite) // 获取站点信息
+router.post('/api/site', params.setSite) // 配置站点信息
+
 // ## 其它
 router.get('/api/terms', post.terms) // 标签、分类，附加最近文章
 router.get('/api/archives', post.archives) // 标签、分类，附加最近文章
-
-// #工具
-router.get('/api/restore', admin, tools.turnPost) // 文件转存到数据库
 
 // 重定向到首页
 router.use(async ctx => {
     return ctx.response.redirect('/')
 })
+
 module.exports = router.routes()

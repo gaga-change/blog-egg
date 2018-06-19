@@ -4,8 +4,7 @@
   "description": "",
   "main": "app/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node app/index.js"
+    "run": "node app/index.js"
   },
   "repository": {
     "type": "git",

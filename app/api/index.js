@@ -35,11 +35,9 @@ router.put('/api/posts/:id', admin, post.bind, post.modify) // 修改
 router.get('/api/terms', post.terms) // 标签、分类，附加最近文章
 router.get('/api/archives', post.archives) // 标签、分类，附加最近文章
 
-// #工具
-router.get('/api/restore', admin, tools.turnPost) // 文件转存到数据库
-
 // 重定向到首页
 router.use(async ctx => {
     return ctx.response.redirect('/')
 })
+
 module.exports = router.routes()

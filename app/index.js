@@ -44,7 +44,6 @@ app.use(staticCache(path.resolve(__dirname, '../publish'), {
 //     maxAge: 365 * 24 * 60 * 60,
 //     gzip: true,
 // })))
-
 app.use(render) // 模板引擎
 app.use(session(CONFIG, app)) // session
 app.use(api) // api & 页面

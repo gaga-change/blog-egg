@@ -1,0 +1,1 @@
+exports.cdn = process.env.BLOG_CDN || ''

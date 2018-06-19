@@ -5,6 +5,7 @@ const post = require('../db/post')
 const getMenuConfig = require('../config/menu')
 const ParamsSchema = require('../models/params_schema')
 const paramsInit = require('../lib/params_init')
+const static = require('../config/blog').cdn // cdn 配置
 /** 工具 */
 module.exports = {
     /** 展示页面中间件 */
@@ -28,6 +29,7 @@ module.exports = {
         for (let [k, v] of siteParams.value) {
             obj[k] = v;
         }
+        obj.static = static
         ctx.state.site = obj // 绑定到上下文
         return next()
     },

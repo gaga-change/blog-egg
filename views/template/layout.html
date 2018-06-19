@@ -10,13 +10,13 @@
     <title>{{title || blog.header}} | {{blog.subhead}}</title>
     <meta name="description" content="{{blog.description}}" />
     <meta name="keywords" content="{{blog.keywords}}" />
-    <link rel="stylesheet" href="//img.junn.top/blog/theme01/css/style.css?v={{blog.version}}">
-    <link rel="stylesheet" href="//img.junn.top/lib/normalize/8.0.0/normalize.min.css">
-    <link rel="stylesheet" href="//img.junn.top/lib/pure/pure-min.css">
-    <link rel="stylesheet" href="//img.junn.top/lib/pure/grids-responsive-min.css">
-    <link rel="stylesheet" href="//img.junn.top/lib/font-awesome/4.7.0/css/font-awesome.min.css?v=1">
-    <script src="//img.junn.top/lib/jquery/3.3.1/jquery.min.js"></script>
-    <script src="//img.junn.top/lib/es6-promise/4.1.1/es6-promise.auto.min.js" async></script>
+    <link rel="stylesheet" href="{{blog.static}}/blog/theme01/css/style.css?v={{blog.version}}">
+    <link rel="stylesheet" href="{{blog.static}}/lib/normalize/8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="{{blog.static}}/lib/pure/pure-min.css">
+    <link rel="stylesheet" href="{{blog.static}}/lib/pure/grids-responsive-min.css">
+    <link rel="stylesheet" href="{{blog.static}}/lib/font-awesome/4.7.0/css/font-awesome.min.css?v=1">
+    <script src="{{blog.static}}/lib/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{{blog.static}}/lib/es6-promise/4.1.1/es6-promise.auto.min.js" async></script>
     <link rel="icon" href="https://gaga-change.github.io/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="https://gaga-change.github.io/favicon.ico" type="image/x-icon" />
 </head>
@@ -103,12 +103,12 @@
         </div>
         <a class="show" id="rocket" href="#top"></a>
     </div>
-    <script src="//img.junn.top/blog/theme01/js/totop.js?v={{blog.version}}" async></script>
-    <script src="//img.junn.top/lib/fancybox/jquery.fancybox.min.js" async></script>
-    <script src="//img.junn.top/blog/theme01/js/fancybox.js?v={{blog.version}}" async></script>
-    <link rel="stylesheet" href="//img.junn.top/lib/fancybox/jquery.fancybox.min.css">
-    <script src="//img.junn.top/blog/theme01/js/codeblock-resizer.js?v={{blog.version}}"></script>
-    <script src="//img.junn.top/blog/theme01/js/smartresize.js?v={{blog.version}}"></script> {% include '../com/_footer.html' %}
+    <script src="{{blog.static}}/blog/theme01/js/totop.js?v={{blog.version}}" async></script>
+    <script src="{{blog.static}}/lib/fancybox/jquery.fancybox.min.js" async></script>
+    <script src="{{blog.static}}/blog/theme01/js/fancybox.js?v={{blog.version}}" async></script>
+    <link rel="stylesheet" href="{{blog.static}}/lib/fancybox/jquery.fancybox.min.css">
+    <script src="{{blog.static}}/blog/theme01/js/codeblock-resizer.js?v={{blog.version}}"></script>
+    <script src="{{blog.static}}/blog/theme01/js/smartresize.js?v={{blog.version}}"></script> {% include '../com/_footer.html' %}
 </body>
 
 </html>

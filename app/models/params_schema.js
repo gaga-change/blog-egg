@@ -13,4 +13,4 @@ const ParamsSchema = new Schema({
 })
 
 
-module.exports = mongoose.model('Params', ParamsSchema)
+module.exports = mongoose.model('Params', ParamsSchema, 'blog_params')

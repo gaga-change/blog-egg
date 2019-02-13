@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" >
+<html lang="zh-CN">
 
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -11,6 +11,7 @@
     <meta name="description" content="{{blog.description}}" />
     <meta name="keywords" content="{{blog.keywords}}" />
     <link rel="stylesheet" href="{{blog.static}}/blog/theme01/css/style.css?v={{blog.version}}">
+    <link rel="stylesheet" href="{{blog.static}}/css/blog_append.css?v={{blog.version}}">
     <link rel="stylesheet" href="{{blog.static}}/lib/normalize/8.0.0/normalize.min.css">
     <link rel="stylesheet" href="{{blog.static}}/lib/pure/pure-min.css">
     <link rel="stylesheet" href="{{blog.static}}/lib/pure/grids-responsive-min.css">
@@ -22,6 +23,9 @@
 </head>
 
 <body>
+    <h1 class="logo">
+        <img src="/img/02.jpg" alt="{{blog.header}}">{{blog.header}}
+    </h1>
     <div class="body_container">
         <div id="header">
             <div class="site-name">
@@ -30,7 +34,7 @@
             </div>
             <div id="nav-menu">
                 {% for menu in menus %}
-                <a  href="{{menu.path}}" {% if menu.current %} class="current" {% endif %}>
+                <a href="{{menu.path}}" {% if menu.current %} class="current" {% endif %}>
                     {% autoescape false %}{{menu.name}} {% endautoescape %}
                 </a>
                 {% endfor %}
@@ -42,7 +46,8 @@
             <div class="pure-u-1-4 hidden_mid_and_down">
                 <div id="sidebar">
                     <div class="widget">
-                        <form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank">
+                        <form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8"
+                            target="_blank">
                             <input type="text" name="q" maxlength="20" placeholder="Search">
                             <input type="hidden" name="sitesearch" value="http://www.junn.top">
                         </form>
@@ -96,7 +101,7 @@
             <div class="pure-u-1 pure-u-md-3-4">
                 <div id="footer">Copyright © 2019
                     <a href="/." rel="nofollow">{{blog.header}}</a> |
-                    <a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn/">浙ICP备17054210号-2	</a> |
+                    <a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn/">浙ICP备17054210号-2 </a> |
                     <a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo">Theme:大道至简</a>
                 </div>
             </div>
@@ -108,7 +113,8 @@
     <script src="{{blog.static}}/blog/theme01/js/fancybox.js?v={{blog.version}}" async></script>
     <link rel="stylesheet" href="{{blog.static}}/lib/fancybox/jquery.fancybox.min.css">
     <script src="{{blog.static}}/blog/theme01/js/codeblock-resizer.js?v={{blog.version}}"></script>
-    <script src="{{blog.static}}/blog/theme01/js/smartresize.js?v={{blog.version}}"></script> {% include '../com/_footer.html' %}
+    <script src="{{blog.static}}/blog/theme01/js/smartresize.js?v={{blog.version}}"></script> {% include
+    '../com/_footer.html' %}
 </body>
 
 </html>

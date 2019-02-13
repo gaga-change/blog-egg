@@ -1,7 +1,7 @@
 const getMenuConfig = require('../config/menu')
 const ParamsSchema = require('../models/params_schema')
 const paramsInit = require('../lib/params_init')
-const static = require('../config/blog').cdn // cdn 配置
+const blogConfig = require('../config/blog')
 /** 工具 */
 module.exports = {
     /** 展示页面中间件 */
@@ -17,16 +17,7 @@ module.exports = {
             menuConfig[0].current = true
         }
         ctx.state.menus = menuConfig
-        let siteParams = await ParamsSchema.findOne({ name: 'site' }) // 获取站点相关信息
-        if (!siteParams) {
-            siteParams = await paramsInit.siteInit()
-        }
-        let obj = Object.create(null);
-        for (let [k, v] of siteParams.value) {
-            obj[k] = v;
-        }
-        obj.static = static
-        ctx.state.site = obj // 绑定到上下文
+        ctx.state.site = blogConfig // 绑定到上下文
         return next()
     },
     /** 权限校验 */

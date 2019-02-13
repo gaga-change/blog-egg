@@ -58,7 +58,7 @@ module.exports = {
         let posts = await Post.find(criteria).select('title id date').sort({ date: -1 })
         let archives = {}
         posts.forEach(item => {
-            let key = item.date.getFullYear()
+            let key = item.date.getFullYear() + ' '
             archives[key] = archives[key] || []
             archives[key].push(item)
         })

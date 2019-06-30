@@ -36,7 +36,7 @@ router.post('/api/site', params.setSite) // 配置站点信息
 
 // ## 其它
 router.get('/api/terms', post.terms) // 标签、分类，附加最近文章
-router.get('/api/archives', post.archives) // 标签、分类，附加最近文章
+router.get('/api/archives', post.archives) // 归档
 
 // 重定向到首页
 router.use(async ctx => {

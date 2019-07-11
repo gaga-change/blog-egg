@@ -38,7 +38,7 @@
             <span class="space">…</span>
             {% endif %} {% if (data.pages > data.page + 2) %}
             <a class="page-number" href="/page/{{data.pages}}">{{data.pages}} </a>{% endif %} {% if (data.pages >= data.page + 1) %}
-            <a class="extend next" rel="next" href="/page/{{data.pages}}">下一页</a>
+            <a class="extend next" rel="next" href="/page/{{data.page + 1}}">下一页</a>
             {% endif %}
         </nav>
     </div>

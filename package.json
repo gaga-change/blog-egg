@@ -1,34 +1,54 @@
 {
   "name": "gaga-change",
   "version": "1.0.0",
-  "description": "",
-  "main": "app/index.js",
+  "description": "个人博客",
+  "private": true,
+  "egg": {
+    "declarations": true
+  },
+  "dependencies": {
+    "egg": "^2.15.1",
+    "egg-mongoose": "^3.2.0",
+    "egg-only": "^0.0.1",
+    "egg-scripts": "^2.11.0",
+    "egg-view-swig": "^1.1.0",
+    "markdown-it": "^8.4.1"
+  },
+  "devDependencies": {
+    "autod": "^3.0.1",
+    "autod-egg": "^1.1.0",
+    "egg-bin": "^4.11.0",
+    "egg-ci": "^1.11.0",
+    "egg-mock": "^3.21.0",
+    "eslint": "^5.13.0",
+    "eslint-config-egg": "^7.1.0"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
   "scripts": {
-    "start": "node app/index.js"
+    "start": "egg-scripts start --port=9876 --title=egg-server-gaga-change",
+    "stop": "egg-scripts stop --title=egg-server-gaga-change",
+    "dev": "egg-bin dev --port=9876",
+    "debug": "egg-bin debug",
+    "test": "npm run lint -- --fix && npm run test-local",
+    "test-local": "egg-bin test",
+    "cov": "egg-bin cov",
+    "lint": "eslint .",
+    "ci": "npm run lint && npm run cov",
+    "autod": "autod"
+  },
+  "ci": {
+    "version": "10"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gaga-change/gaga-change.git"
   },
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/gaga-change/gaga-change/issues"
   },
   "homepage": "https://github.com/gaga-change/gaga-change#readme",
-  "dependencies": {
-    "js-yaml": "^3.11.0",
-    "koa": "^2.5.1",
-    "koa-body": "^2.5.0",
-    "koa-logger": "^3.2.0",
-    "koa-mount": "^3.0.0",
-    "koa-router": "^7.4.0",
-    "koa-session": "^5.8.1",
-    "koa-static-cache": "^5.1.2",
-    "koa-views": "^6.1.4",
-    "markdown-it": "^8.4.1",
-    "mongoose": "^5.1.1",
-    "only": "0.0.2",
-    "swig": "^1.4.2"
-  }
+  "author": "严俊东",
+  "license": "MIT"
 }

@@ -30,13 +30,12 @@
   }
 ```
 
-## 运行&打包
+## 运行
 
 ``` bash
 # 下载依赖
 npm install
 
 # localhost:9876 运行
-node ./app
-
+npm run dev
 ```

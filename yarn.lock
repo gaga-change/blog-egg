@@ -2723,10 +2723,10 @@ egg-onerror@^2.1.0:
     mustache "^2.3.0"
     stack-trace "^0.0.10"
 
-egg-only2@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/egg-only2/-/egg-only2-0.0.5.tgz#ef4a9325c336fd0c4134709c076131a385ea0104"
-  integrity sha512-ok7ymXNPnL+9nHkGLdif2d3hjdBhGGp6yUZV7rPI/tuc8PBlHWvb/6CK+EeDJT+vXYAzH6dSh+OMBr4yToLDkA==
+egg-only@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/egg-only/-/egg-only-0.0.1.tgz#e34729df88fbe52a8284a9f7762c64ca5bb9b3bf"
+  integrity sha512-Muz12sHkGJ5QWw+bHN7rOFswkutixY3MpcWpu8qhugcPAb04azZ9biMhYpMlj348ZTMFy7cf41wZdzbk100FXQ==
   dependencies:
     only "0.0.2"
 
@@ -4507,13 +4507,6 @@ js-yaml@3.13.1, js-yaml@^3.13.0:
   version "3.13.1"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.13.1.tgz#aff151b30bfdfa8e49e05da22e7415e9dfa37847"
   integrity sha512-YfbcO7jXDdyj0DGxYVSlSeQNHbD7XPWvrVWeVUujrQEoZzWJIRrCPoyk6kL6IAjAG2IolMK4T0hNUe0HOUs5Jw==
-  dependencies:
-    argparse "^1.0.7"
-    esprima "^4.0.0"
-
-js-yaml@^3.11.0:
-  version "3.11.0"
-  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.11.0.tgz#597c1a8bd57152f26d622ce4117851a51f5ebaef"
   dependencies:
     argparse "^1.0.7"
     esprima "^4.0.0"

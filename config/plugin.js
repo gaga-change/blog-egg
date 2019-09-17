@@ -9,9 +9,9 @@ module.exports = {
     enable: true,
     package: 'egg-mongoose',
   },
-  only2: {
+  only: {
     enable: true,
-    package: 'egg-only2',
+    package: 'egg-only',
   },
   swig: {
     enable: true,

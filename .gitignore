@@ -13,3 +13,5 @@ run/
 typings/
 .nyc_output/
 lib/mongo_default.js
+.travis.yml
+appveyor.yml

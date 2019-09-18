@@ -6,5 +6,5 @@ COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
 # RUN npm --registry https://registry.npm.taobao.org install --production --silent
 RUN npm install --production --silent
 COPY . .
-EXPOSE 80
+EXPOSE 9876
 CMD npm start

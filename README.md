@@ -22,8 +22,8 @@ npm run dev
 
 ### 环境变量
 
-`MONGODB_USERNAME` mongodb 用户名
-`MONGODB_PASSWORD` mongodb 密码
-`MONGODB_HOST` mongodb host地址
-`MONGODB_PORT` mongodb 端口
-`MONGODB_COLLECTION` mongodb 集合名称
+* `MONGODB_USERNAME` mongodb 用户名
+* `MONGODB_PASSWORD` mongodb 密码
+* `MONGODB_HOST` mongodb host地址
+* `MONGODB_PORT` mongodb 端口
+* `MONGODB_COLLECTION` mongodb 集合名称

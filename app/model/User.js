@@ -38,7 +38,6 @@ module.exports = app => {
    * @return {Boolean} 返回是否正确
    */
     authenticate(plainText) {
-      console.log('???', plainText);
       return this.encryptPassword(plainText) === this.hashedPassword;
     },
 

@@ -23,6 +23,7 @@ module.exports = app => {
   router.get('/api/user', controller.user.user); // 获取当前登入用户
   router.post('/api/user/login', controller.user.login); // 用户登录
   router.get('/api/user/logout', controller.user.logout); // 用户退出登录
+  router.post('/api/login/account', controller.user.login) // 用户登录
 
   // ## 文章
   router.get('/api/posts/:id', controller.post.find); // 获取指定ID文章

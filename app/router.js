@@ -6,10 +6,10 @@
 module.exports = app => {
   const { router, controller } = app;
 
-  const admin = app.middleware.admin();
+  const admin = app.middleware.admin(app);
 
   // ## 用户
-  router.get('/api/users', controller.user.findUser); // 获取用户
+  router.get('/api/users', admin, controller.user.findUser); // 获取用户
   router.post('/api/user', controller.user.userSave); // 注册用户
   router.get('/api/user', controller.user.user); // 获取当前登入用户
   router.post('/api/user/login', controller.user.login); // 用户登录

@@ -11,8 +11,7 @@ class UserController extends Controller {
    */
   async findUser() {
     const { ctx, service } = this;
-    const users = await service.user.findALl();
-    ctx.body = { data: users };
+    ctx.body = await service.user.findAll();
   }
 
   /**

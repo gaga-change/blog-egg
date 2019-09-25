@@ -27,6 +27,28 @@ module.exports = appInfo => {
   return {
     ...config,
     ...userConfig,
+    statusCode: {
+      /** 成功 */
+      SUCCESS: 200,
+
+      /** 创建成功，要返回数据  */
+      CREATE: 201,
+
+      /** 操作成功，但不返回数据 */
+      NO_CONENT: 204,
+
+      /** 参数异常，或者不明确的错误 */
+      BAD_REQUEST: 400,
+
+      /** 没有提供认证信息：未登陆 */
+      UNAUTHORIZED: 401,
+
+      /** 禁止访问：无权限 */
+      FORBIDDEN: 403,
+
+      /** 找不到数据 */
+      NO_FOUND: 404,
+    },
     security: {
       csrf: {
         enable: false,

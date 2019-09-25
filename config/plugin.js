@@ -3,7 +3,7 @@
 /** @type Egg.EggPlugin */
 module.exports = {
   static: {
-    enable: true,
+    enable: false,
   },
   mongoose: {
     enable: true,
@@ -12,9 +12,5 @@ module.exports = {
   only: {
     enable: true,
     package: 'egg-only',
-  },
-  swig: {
-    enable: true,
-    package: 'egg-view-swig',
   },
 };

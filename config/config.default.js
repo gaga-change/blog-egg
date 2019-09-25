@@ -22,31 +22,6 @@ module.exports = appInfo => {
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
-    site: {
-      staitc: process.env.BLOG_CDN || '',
-      header: '严俊东', // 头部标题
-      subhead: '严俊东个人博客', // 副标题
-      description: '严俊东的个人博客。技术包括但不限于JavaScript、NodeJS、CSS3、HTML以及各类编程开发等相关内容。邮箱gaga_change@qq.com，微信号gaga_change。',
-      keywords: '严俊东,严俊东个人博客,严俊东博客',
-      version: '3.1.4',
-    },
-    menus: [
-      {
-        path: '/.',
-        name: '<i class="fa fa-home">首页</i>',
-        current: false,
-      },
-      {
-        path: '/archives',
-        name: '<i class="fa fa-archive">归档</i>',
-        current: false,
-      },
-      {
-        path: '/about',
-        name: '<i class="fa fa-user">关于</i>',
-        current: false,
-      },
-    ],
   };
 
   return {
@@ -56,10 +31,6 @@ module.exports = appInfo => {
       csrf: {
         enable: false,
       },
-    },
-    static: {
-      prefix: '/',
-      dir: './publish',
     },
     session: {
       key: 'EGG_SESS',
@@ -73,12 +44,6 @@ module.exports = appInfo => {
         useFindAndModify: false,
       },
       plugins: [],
-    },
-    view: {
-      defaultViewEngine: 'swig',
-      mapping: {
-        '.html': 'swig',
-      },
     },
   };
 };

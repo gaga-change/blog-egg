@@ -11,8 +11,9 @@ class BaseController extends Controller {
 
   /**
    * 返回内容包装
-   * @param {*} data 数据
-   * @param {*} errMsg 异常消息
+   * @param {Object} data 数据
+   * @param {String} errMsg 异常消息
+   * @param {Number} code 状态码
    */
   res(data, errMsg, code) {
     this.ctx.status = code;

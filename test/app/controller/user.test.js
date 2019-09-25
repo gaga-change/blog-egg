@@ -9,7 +9,7 @@ describe('test/app/controller/user.test.js', () => {
       .get('/api/users')
       .expect(200)
       .then(response => {
-        assert(response.body.constructor === Array )
-    })
+        assert(response.body.constructor === Array);
+      });
   });
 });

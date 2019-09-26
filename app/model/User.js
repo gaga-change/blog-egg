@@ -15,7 +15,6 @@ module.exports = app => {
     remark: { type: String, default: '', trim: true }, // 备注
     salt: { default: '', type: String },
     hashedPassword: { default: '', type: String },
-    roles: [{ type: Schema.Types.ObjectId, ref: 'role' }], // 权限列表
   }, {
     timestamps: true,
   });

@@ -13,6 +13,11 @@ module.exports = app => {
   // ## 用户
   router.get('/api/users/total', controller.user.userTotal); // 获取用户数量
 
+  // ## auth
+  router.get('/api/auth/login', controller.auth.login); // 登录 | 注册
+  router.get('/api/auth/current', controller.auth.current); // 当前用户
+  router.get('/api/auth/logout', controller.auth.logout); // 退出登录
+
   // ## 文章
   router.get('/api/posts/:id', controller.post.find); // 获取指定ID文章
   router.get('/api/posts', controller.post.findAll); // 获取所有

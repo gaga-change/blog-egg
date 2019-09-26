@@ -63,7 +63,7 @@ module.exports = appInfo => {
     mongoose: {
       url: mongodbConnectLink,
       options: {
-        useFindAndModify: false,
+        useUnifiedTopology: true,
       },
       plugins: [],
     },

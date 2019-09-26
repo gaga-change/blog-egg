@@ -10,4 +10,11 @@ describe('test/app/controller/home.test.js', () => {
     // const ctx = app.mockContext({});
     // yield ctx.service.xx();
   });
+
+  it('should GET /', async () => {
+    await app.httpRequest()
+      .get('/')
+      .expect('blog api')
+      .expect(200);
+  });
 });

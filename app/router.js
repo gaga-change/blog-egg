@@ -14,7 +14,7 @@ module.exports = app => {
   router.get('/api/users/total', controller.user.userTotal); // 获取用户数量
 
   // ## auth
-  router.get('/api/auth/login', controller.auth.login); // 登录 | 注册
+  router.post('/api/auth/login', controller.auth.login); // 登录 | 注册
   router.get('/api/auth/current', controller.auth.current); // 当前用户
   router.get('/api/auth/logout', controller.auth.logout); // 退出登录
 

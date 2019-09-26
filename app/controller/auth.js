@@ -15,7 +15,7 @@ class AuthController extends Controller {
     const body = ctx.request.body;
     ctx.assert(body.username, '用户名不能为空', 400);
     ctx.assert(body.password, '密码不能为空', 400);
-    const users = service.user.findAll();
+    const users = await service.user.findAll();
     if (users.length) {
       ctx.body = await service.user.login();
     } else { // 不存在用户则进行注册操作

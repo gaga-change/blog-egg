@@ -27,6 +27,11 @@ module.exports = appInfo => {
   return {
     ...config,
     ...userConfig,
+    onerror: {
+      accepts() {
+        return 'json';
+      },
+    },
     statusCode: {
       /** 成功 */
       SUCCESS: 200,

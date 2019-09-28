@@ -18,6 +18,11 @@ module.exports = app => {
   router.get('/api/auth/current', controller.auth.current); // 当前用户
   router.get('/api/auth/logout', controller.auth.logout); // 退出登录
 
+  // ## 标签
+  router.resources('/api/tags', admin, controller.tag);
+  // ## 分类
+  router.resources('/api/categories', admin, controller.category);
+
   // ## 文章
   router.get('/api/posts/:id', controller.post.find); // 获取指定ID文章
   router.get('/api/posts', controller.post.findAll); // 获取所有

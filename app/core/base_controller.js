@@ -73,7 +73,7 @@ class BaseController extends Controller {
 
     const temp = await this.Model.deleteOne({ _id: id });
     ctx.assert(temp.deletedCount === 1, config.statusCode.NO_FOUND, '资源不存在');
-    this.success({}, config.statusCode.NO_CONENT);
+    this.success(null, config.statusCode.NO_CONENT);
   }
 
   async update() {
@@ -83,7 +83,7 @@ class BaseController extends Controller {
 
     const temp = await this.Model.update({ _id: id }, item);
     ctx.assert(temp.nModified === 1, this.config.statusCode.NO_FOUND, '资源不存在');
-    this.success({}, this.config.statusCode.NO_CONENT);
+    this.success(null, this.config.statusCode.NO_CONENT);
   }
 }
 

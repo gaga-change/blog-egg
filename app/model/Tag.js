@@ -15,5 +15,5 @@ module.exports = app => {
     timestamps: true,
   });
 
-  return mongoose.model('Category', UserSchema, 'blog_category');
+  return mongoose.model('Tag', UserSchema, 'blog_tag');
 };

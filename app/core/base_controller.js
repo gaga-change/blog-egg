@@ -25,11 +25,11 @@ class BaseController extends Controller {
   }
 
   error(errMsg, code) {
-    this.res(null, errMsg, code || this.config.statusCode.SUCCESS);
+    this.res(null, errMsg, code || this.config.statusCode.BAD_REQUEST);
   }
 
   success(data, code) {
-    this.res(data, null, code || this.config.statusCode.BAD_REQUEST);
+    this.res(data, null, code || this.config.statusCode.SUCCESS);
   }
 
   async index() {
@@ -81,7 +81,7 @@ class BaseController extends Controller {
     const { id } = ctx.params;
     const item = ctx.request.body;
 
-    const temp = await this.Model.update({ _id: id }, item);
+    const temp = await this.Model.updateOne({ _id: id }, item);
     ctx.assert(temp.nModified === 1, this.config.statusCode.NO_FOUND, '资源不存在');
     this.success(null, this.config.statusCode.NO_CONENT);
   }

@@ -19,18 +19,25 @@ module.exports = app => {
   router.get('/api/auth/logout', controller.auth.logout); // 退出登录
 
   // ## 标签
-  router.resources('/api/tags', admin, controller.tag);
+  router.get('/api/tags', controller.tag.index);
+  router.get('/api/tags/:id', controller.tag.show);
+  router.post('/api/tags', admin, controller.tag.create);
+  router.put('/api/tags/:id', admin, controller.tag.update);
+  router.delete('/api/tags/:id', admin, controller.tag.destroy);
+
   // ## 分类
-  router.resources('/api/categories', admin, controller.category);
+  router.get('/api/categories', controller.category.index);
+  router.get('/api/categories/:id', controller.tcategoryag.show);
+  router.post('/api/categories', admin, controller.category.create);
+  router.put('/api/categories/:id', admin, controller.category.update);
+  router.delete('/api/categories/:id', admin, controller.category.destroy);
 
   // ## 文章
-  router.get('/api/posts/:id', controller.post.find); // 获取指定ID文章
-  router.get('/api/posts', controller.post.findAll); // 获取所有
-  router.post('/api/posts', admin, controller.post.create); // 创建
-  router.delete('/api/posts/:id', admin, controller.post.delete); // 删除文章
-  router.put('/api/posts/:id', admin, controller.post.modify); // 修改
+  router.get('/api/posts', controller.post.index);
+  router.get('/api/posts/archives', controller.post.archives); // 归档
+  router.get('/api/posts/:id', controller.post.show);
+  router.post('/api/posts', admin, controller.post.create);
+  router.put('/api/posts/:id', admin, controller.post.update);
+  router.delete('/api/posts/:id', admin, controller.post.destroy);
 
-  // ## 其它
-  router.get('/api/terms', controller.post.terms); // 标签、分类，附加最近文章
-  router.get('/api/archives', controller.post.archives); // 归档
 };

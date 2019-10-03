@@ -1,6 +1,6 @@
 'use strict';
 
-const BaseController = require('../core/base_controller');
+const BaseController = require('../core/base-controller');
 
 class CategoryController extends BaseController {
   constructor(...args) {

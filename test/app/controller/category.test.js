@@ -3,12 +3,41 @@
 const { app, assert } = require('egg-mock/bootstrap');
 
 describe('test/app/controller/category.test.js', () => {
-  describe('category 增删改查，未登录', () => {
-    it('should GET /api/categories', async () => {
+  describe('category 增删改，未登录', () => {
+    const tempData = [];
+    it('should POST /api/categories', async () => {
+      const { Category } = app.model;
+      const temp = new Category();
+      tempData.push(temp);
       await app.httpRequest()
-        .get('/api/categories')
+        .post('/api/categories')
+        .set('Accept', 'application/json')
+        .send(temp)
+        .expect(401);
+    });
+    it('should DELETE /api/categories/:id', async () => {
+      const { Category } = app.model;
+      const temp = new Category();
+      await app.httpRequest()
+        .delete(`/api/categories/${temp._id}`)
         .set('Accept', 'application/json')
         .expect(401);
+    });
+    it('should PUT /api/categories/:id', async () => {
+      const { Category } = app.model;
+      const temp = new Category();
+      tempData.push(temp);
+      await app.httpRequest()
+        .put(`/api/categories/${temp._id}`)
+        .set('Accept', 'application/json')
+        .send(temp)
+        .expect(401);
+    });
+    after(async () => {
+      const { Category } = app.model;
+      for (let i = 0; i < tempData.length; i++) {
+        await Category.deleteOne({ _id: tempData[i]._id.toString() });
+      }
     });
   });
   describe('category 增删改查，登录', () => {
@@ -115,7 +144,7 @@ describe('test/app/controller/category.test.js', () => {
     after(async () => {
       const { Category } = app.model;
       for (let i = 0; i < tempData.length; i++) {
-        await Category.deleteOne(tempData[i]);
+        await Category.deleteOne({ _id: tempData[i]._id.toString() });
       }
     });
   });

@@ -6,6 +6,9 @@ const BaseController = require('../core/base-controller');
  * @param {Egg.Application} app - egg application
  */
 class PostController extends BaseController {
+  constructor(...args) {
+    super('Post', ...args);
+  }
 
   /** 归档 */
   async archives() {

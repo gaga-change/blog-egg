@@ -27,7 +27,7 @@ module.exports = app => {
 
   // ## 分类
   router.get('/api/categories', controller.category.index);
-  router.get('/api/categories/:id', controller.tcategoryag.show);
+  router.get('/api/categories/:id', controller.category.show);
   router.post('/api/categories', admin, controller.category.create);
   router.put('/api/categories/:id', admin, controller.category.update);
   router.delete('/api/categories/:id', admin, controller.category.destroy);

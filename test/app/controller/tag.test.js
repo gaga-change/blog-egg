@@ -3,14 +3,8 @@
 const { app, assert } = require('egg-mock/bootstrap');
 
 describe('test/app/controller/tag.test.js', () => {
-  describe('tag 增删改查，未登录', () => {
+  describe('tag 增删改，未登录', () => {
     const tempData = [];
-    it('should GET /api/tags', async () => {
-      await app.httpRequest()
-        .get('/api/tags')
-        .set('Accept', 'application/json')
-        .expect(401);
-    });
     it('should POST /api/tags', async () => {
       const { Tag } = app.model;
       const temp = new Tag();
@@ -19,14 +13,6 @@ describe('test/app/controller/tag.test.js', () => {
         .post('/api/tags')
         .set('Accept', 'application/json')
         .send(temp)
-        .expect(401);
-    });
-    it('should GET /api/tags/:id', async () => {
-      const { Tag } = app.model;
-      const temp = new Tag();
-      await app.httpRequest()
-        .get(`/api/tags/${temp._id}`)
-        .set('Accept', 'application/json')
         .expect(401);
     });
     it('should DELETE /api/tags/:id', async () => {
@@ -50,7 +36,7 @@ describe('test/app/controller/tag.test.js', () => {
     after(async () => {
       const { Tag } = app.model;
       for (let i = 0; i < tempData.length; i++) {
-        await Tag.deleteOne(tempData[i]);
+        await Tag.deleteOne({ _id: tempData[i]._id.toString() });
       }
     });
   });
@@ -137,7 +123,7 @@ describe('test/app/controller/tag.test.js', () => {
     after(async () => {
       const { Tag } = app.model;
       for (let i = 0; i < tempData.length; i++) {
-        await Tag.deleteOne(tempData[i]);
+        await Tag.deleteOne({ _id: tempData[i]._id.toString() });
       }
     });
   });

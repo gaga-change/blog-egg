@@ -13,10 +13,10 @@ class PostService extends Service {
    * @param {Object} criteria 筛选条件
    */
   async archives(criteria = {}) {
-    const posts = await this.Post.find(criteria).select('title id date').sort({ date: -1 });
+    const posts = await this.Post.find(criteria).select('title id createdAt').sort({ date: -1 });
     const archives = {};
     posts.forEach(item => {
-      const key = new Date(item.date).getFullYear() + ' ';
+      const key = new Date(item.createdAt).getFullYear() + ' ';
       archives[key] = archives[key] || [];
       archives[key].push(item);
     });

@@ -72,6 +72,13 @@ describe('test/app/controller/auth.test.js', () => {
         .expect(200);
       assert(response2.body.username === 'abc');
       assert(response2.body.password === undefined);
+      const response3 = await app.httpRequest()
+        .get('/api/auth/current')
+        .set('Cookie', response2.headers['set-cookie'])
+        .set('Accept', 'application/json')
+        .expect(200);
+      assert(response3.body.username === 'abc');
+      assert(response3.body.password === undefined);
     });
     after(async () => {
       const { User } = app.model;
@@ -132,5 +139,27 @@ describe('test/app/controller/auth.test.js', () => {
       }
     });
   });
-
+  it('should GET /api/auth/current & /api/auth/logout', async () => {
+    app.mockSession({
+      user: { username: 'gaga' },
+    });
+    await app.httpRequest()
+      .get('/api/auth/current')
+      .set('Accept', 'application/json')
+      .expect({ username: 'gaga' })
+      .expect(200);
+    await app.httpRequest()
+      .get('/api/auth/current')
+      .set('Accept', 'application/json')
+      .expect({ username: 'gaga' })
+      .expect(200);
+    await app.httpRequest()
+      .get('/api/auth/logout')
+      .set('Accept', 'application/json')
+      .expect(204);
+    await app.httpRequest()
+      .get('/api/auth/current')
+      .set('Accept', 'application/json')
+      .expect(204);
+  });
 });

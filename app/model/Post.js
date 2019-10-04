@@ -21,23 +21,6 @@ module.exports = app => {
     timestamps: true,
   });
 
-  /** 静态方法 */
-  PostSchema.statics = {
-    _findOne(opt) {
-      return this._findOne(opt.query).select('-markdown');
-    },
-
-    _findAll({ page = 1, pageSize = 20, select = '-content -markdown', criteria = {} } = {}) {
-      pageSize = Math.min(30, pageSize);
-      return this.find(criteria)
-        .select(select)
-        .sort({ date: -1 })
-        .limit(pageSize)
-        .skip((page - 1) * pageSize);
-    },
-  };
-
   return mongoose.model('Post', PostSchema, 'blog_post');
-
 };
 

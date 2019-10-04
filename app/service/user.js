@@ -25,7 +25,6 @@ class UserService extends Service {
 
     ctx.assert(findUser, '用户名不存在', 400);
     ctx.assert(findUser.authenticate(body.password), '密码错误', 400);
-    ctx.session.user = findUser;
     return findUser;
   }
 

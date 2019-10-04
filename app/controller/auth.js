@@ -17,7 +17,7 @@ class AuthController extends Controller {
     ctx.assert(body.password, '密码不能为空', 400);
     const users = await service.user.findAll();
     if (users.length) {
-      ctx.body = await service.user.login();
+      ctx.body = ctx.session.user = await service.user.login();
     } else { // 不存在用户则进行注册操作
       const user = await service.user.registry();
       ctx.body = ctx.session.user = user;

@@ -46,17 +46,10 @@ module.exports = app => {
    * @return {String} 密文
    */
     encryptPassword(password) {
-      if (!password) {
-        return '';
-      }
-      try {
-        return crypto.
-          createHmac('sha1', this.salt).
-          update(password).
-          digest('hex');
-      } catch (err) {
-        return '';
-      }
+      return crypto.
+        createHmac('sha1', this.salt).
+        update(password).
+        digest('hex');
     },
 
     /**

@@ -4,7 +4,7 @@ const { app, assert } = require('egg-mock/bootstrap');
 
 describe('test/app/controller/auth.test.js', () => {
   describe('should post /api/auth/login', () => {
-    it('not empty', async () => {
+    it('必填字段校验', async () => {
       await app.httpRequest()
         .post('/api/auth/login')
         .set('Accept', 'application/json')
@@ -35,7 +35,7 @@ describe('test/app/controller/auth.test.js', () => {
         .expect(400);
     });
   });
-  describe('login - no user', () => {
+  describe('should post /api/auth/login - no user', () => {
     let localUser;
     before(async () => {
       const { User } = app.model;
@@ -45,7 +45,7 @@ describe('test/app/controller/auth.test.js', () => {
         await User.deleteOne(localUser);
       }
     });
-    it('no user', async () => {
+    it('首次登录，无用户', async () => {
       const response = await app.httpRequest()
         .post('/api/auth/login')
         .send({
@@ -88,7 +88,7 @@ describe('test/app/controller/auth.test.js', () => {
       }
     });
   });
-  describe('login - has user', () => {
+  describe('should post /api/auth/login - has user', () => {
     let localUser,
       temp;
     before(async () => {
@@ -101,8 +101,7 @@ describe('test/app/controller/auth.test.js', () => {
       temp = new User({ username: 'foo', password: '123' });
       await temp.save();
     });
-    it('has user', async () => {
-
+    it('已存在用户', async () => {
       await app.httpRequest()
         .post('/api/auth/login')
         .send({

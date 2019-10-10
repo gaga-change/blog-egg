@@ -39,7 +39,7 @@ describe('test/app/controller/auth.test.js', () => {
     let localUser;
     before(async () => {
       const { User } = app.model;
-      const localUsers = User.find({});
+      const localUsers = await User.find({});
       localUser = localUsers[0];
       if (localUser) {
         await User.deleteOne(localUser);
@@ -82,7 +82,7 @@ describe('test/app/controller/auth.test.js', () => {
     });
     after(async () => {
       const { User } = app.model;
-      await User.remove({});
+      await User.deleteMany({});
       if (localUser) {
         await localUser.save();
       }

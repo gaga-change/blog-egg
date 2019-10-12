@@ -10,9 +10,9 @@ module.exports = app => {
   const Schema = mongoose.Schema;
 
   const UserSchema = new Schema({
-    username: { type: String, default: '', trim: true }, // 名称
-    email: { type: String, default: '', trim: true }, // 邮箱
-    remark: { type: String, default: '', trim: true }, // 备注
+    username: { type: String, minlength: 1, maxlength: 1000, trim: true }, // 用户名
+    email: { type: String, default: '', trim: true, maxlength: 1000 }, // 邮箱
+    remark: { type: String, default: '', trim: true, maxlength: 1000 }, // 备注
     salt: { default: '', type: String },
     hashedPassword: { default: '', type: String },
   }, {

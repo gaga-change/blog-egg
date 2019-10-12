@@ -8,9 +8,9 @@ module.exports = app => {
   const Schema = mongoose.Schema;
 
   const UserSchema = new Schema({
-    name: { type: String, default: '', trim: true }, // 名称
-    alias: { type: String, default: '', trim: true }, // 别名【全字母、小写，用户url】
-    remark: { type: String, default: '', trim: true }, // 备注
+    name: { type: String, trim: true, minlength: 1, maxlength: 1000, unique: true }, // 名称
+    alias: { type: String, default: '', trim: true, maxlength: 1000 }, // 别名【全字母、小写，用户url】
+    remark: { type: String, default: '', trim: true, maxlength: 1000 }, // 备注
   }, {
     timestamps: true,
   });

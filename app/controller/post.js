@@ -7,7 +7,10 @@ const BaseController = require('../core/base-controller');
  */
 class PostController extends BaseController {
   constructor(...args) {
-    super('Post', ...args);
+    super({
+      modelName: 'Post',
+      populates: [ 'tags', 'category' ],
+    }, ...args);
   }
 
   /** 归档 */

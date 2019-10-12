@@ -4,8 +4,16 @@ const Controller = require('egg').Controller;
 
 class BaseController extends Controller {
 
-  constructor(modelName, ...args) {
+  constructor(options, ...args) {
     super(...args);
+    let modelName;
+    if (typeof options === 'string') {
+      modelName = options;
+      this._options = {};
+    } else {
+      modelName = options.modelName;
+      this._options = options;
+    }
     this.Model = this.ctx.model[modelName];
   }
 
@@ -34,16 +42,20 @@ class BaseController extends Controller {
 
   async index() {
     const { ctx } = this;
+    const { populates = [] } = this._options;
     const query = ctx.query;
     const pageSize = Number(ctx.query.pageSize) || 20;
     const page = Number(ctx.query.pageNum) || 1;
     const params = { ...query };
     delete params.pageSize;
     delete params.pageNum;
-    const list = await this.Model.find(params)
+    const mongoQuery = this.Model.find(params)
       .sort({ createdAt: -1 })
       .limit(pageSize)
       .skip((page - 1) * pageSize);
+
+    populates.forEach(v => mongoQuery.populate(v));
+    const list = await mongoQuery;
     this.success({
       total: await this.Model.countDocuments(params),
       list,

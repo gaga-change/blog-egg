@@ -4,7 +4,10 @@ const BaseController = require('../core/base-controller');
 
 class TagController extends BaseController {
   constructor(...args) {
-    super('Tag', ...args);
+    super({
+      modelName: 'Tag',
+      populates: [ 'logos' ],
+    }, ...args);
   }
 }
 

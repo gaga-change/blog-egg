@@ -11,7 +11,7 @@ module.exports = app => {
 
   const UserSchema = new Schema({
     username: { type: String, minlength: 1, maxlength: 1000, trim: true }, // 用户名
-    logo: [{ type: Schema.Types.ObjectId, ref: 'Oss' }], // logo
+    icons: [{ type: Schema.Types.ObjectId, ref: 'Oss' }], // 头像
     email: { type: String, default: '', trim: true, maxlength: 1000 }, // 邮箱
     remark: { type: String, default: '', trim: true, maxlength: 1000 }, // 备注
     salt: { default: '', type: String },

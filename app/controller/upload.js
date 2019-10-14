@@ -25,8 +25,6 @@ module.exports = class extends Controller {
     } else {
       await sendToWormhole(stream);
     }
-    ctx.body = {
-      oss,
-    };
+    ctx.body = oss;
   }
 };

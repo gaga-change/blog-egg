@@ -4,7 +4,11 @@ const BaseController = require('../core/base-controller');
 
 class CategoryController extends BaseController {
   constructor(...args) {
-    super('Category', ...args);
+    super(
+      {
+        modelName: 'Category',
+        populates: [ 'logos' ],
+      }, ...args);
   }
 }
 

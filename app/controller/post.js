@@ -9,7 +9,7 @@ class PostController extends BaseController {
   constructor(...args) {
     super({
       modelName: 'Post',
-      populates: [ 'tags', 'category' ],
+      populates: [ 'tags', 'category', 'logos' ],
     }, ...args);
   }
 

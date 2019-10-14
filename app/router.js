@@ -40,4 +40,7 @@ module.exports = app => {
   router.put('/api/posts/:id', admin, controller.post.update);
   router.delete('/api/posts/:id', admin, controller.post.destroy);
 
+  // ## 工具
+  router.post('/api/upload', controller.upload.uploadNotRequiredFile); // 上传文件到七牛云
+
 };

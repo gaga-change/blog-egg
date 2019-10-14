@@ -11,7 +11,8 @@
     "egg-mongoose": "^3.2.0",
     "egg-only": "^0.0.1",
     "egg-scripts": "^2.11.0",
-    "markdown-it": "^8.4.1"
+    "markdown-it": "^8.4.1",
+    "qiniu": "^7.2.2"
   },
   "devDependencies": {
     "autod": "^3.0.1",

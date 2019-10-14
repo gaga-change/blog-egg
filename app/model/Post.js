@@ -18,6 +18,8 @@ module.exports = app => {
     history: [{ type: Schema.Types.ObjectId, ref: 'Post' }], // 历史版本
     intro: { type: String, default: '', trim: true, maxlength: 1000 }, // 描述
     markdown: { type: String, default: '' }, // 源文件内容
+    logo: [{ type: Schema.Types.ObjectId, ref: 'Oss' }], // logo
+    resource: [{ type: Schema.Types.ObjectId, ref: 'Oss' }], // 相关资源（图片、文件）
   }, {
     timestamps: true,
   });

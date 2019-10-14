@@ -2,6 +2,7 @@
 
 'use strict';
 const { mongodbConnectLink } = require('../lib/mongo');
+const qiniuConfig = require('../lib/qiniu.config');
 
 /**
  * @param {Egg.EggAppInfo} appInfo app info
@@ -72,5 +73,9 @@ module.exports = appInfo => {
       },
       plugins: [],
     },
+    multipart: {
+      fileSize: '3mb',
+    },
+    qiniu: qiniuConfig,
   };
 };

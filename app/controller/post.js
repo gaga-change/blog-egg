@@ -18,6 +18,15 @@ class PostController extends BaseController {
     const { ctx, service } = this;
     ctx.body = await service.post.archives();
   }
+
+  /** 增加点击量 */
+  async autoAddReadTime() {
+    const { ctx } = this;
+    const { Post } = ctx.model;
+    const { id } = ctx.params;
+    await Post.updateOne({ _id: id }, { $inc: { readTime: 1 } });
+    this.success(null, 204);
+  }
 }
 
 module.exports = PostController;

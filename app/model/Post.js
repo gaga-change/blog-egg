@@ -20,6 +20,7 @@ module.exports = app => {
     markdown: { type: String, default: '' }, // 源文件内容
     logos: [{ type: Schema.Types.ObjectId, ref: 'Oss' }], // logo
     resources: [{ type: Schema.Types.ObjectId, ref: 'Oss' }], // 相关资源（图片、文件）
+    readTime: { type: Number, default: 0 }, // 点击量
   }, {
     timestamps: true,
   });

@@ -165,4 +165,36 @@ describe('test/app/controller/post.test.js', () => {
       }
     });
   });
+
+  describe('增加点击量', () => {
+    const tempData = [];
+    it('should PUT /api/posts/:id/autoAddReadTime', async () => {
+      const { Post } = app.model;
+      const post = new Post({
+        title: Date.now() + '' + Math.random(),
+      });
+      tempData.push(post);
+      await post.save();
+      await app.httpRequest()
+        .put(`/api/posts/${post._id.toString()}/autoAddReadTime`)
+        .set('Accept', 'application/json')
+        .expect(204);
+      const findDbPost = await Post.findById(post._id.toString());
+      assert(findDbPost.readTime === 1);
+      await app.httpRequest()
+        .put(`/api/posts/${post._id.toString()}/autoAddReadTime`)
+        .set('Accept', 'application/json')
+        .expect(204);
+      const findDbPost2 = await Post.findById(post._id.toString());
+      assert(findDbPost2.readTime === 2);
+      const post2 = new Post({
+        title: Date.now() + '' + Math.random(),
+      });
+      await app.httpRequest()
+        .put(`/api/posts/${post2._id.toString()}/autoAddReadTime`)
+        .set('Accept', 'application/json')
+        .expect(204);
+      assert(await Post.findById(post2._id.toString()) === null);
+    });
+  });
 });

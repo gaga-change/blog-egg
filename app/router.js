@@ -39,6 +39,7 @@ module.exports = app => {
   router.post('/api/posts', admin, controller.post.create);
   router.put('/api/posts/:id', admin, controller.post.update);
   router.delete('/api/posts/:id', admin, controller.post.destroy);
+  router.put('/api/posts/:id/autoAddReadTime', controller.post.autoAddReadTime); // 增加点击量
 
   // ## 工具
   router.post('/api/upload', controller.upload.uploadNotRequiredFile); // 上传文件到七牛云

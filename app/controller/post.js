@@ -9,7 +9,11 @@ class PostController extends BaseController {
   constructor(...args) {
     super({
       modelName: 'Post',
-      populates: [ 'tags', 'category', 'logos' ],
+      populates: [
+        { path: 'tags', select: '_id name' },
+        { path: 'category', select: '_id name' },
+        { path: 'logos' }],
+      defaultIndexSelect: '-markdown -content -history',
     }, ...args);
   }
 

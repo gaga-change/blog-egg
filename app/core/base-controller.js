@@ -42,18 +42,24 @@ class BaseController extends Controller {
 
   async index() {
     const { ctx } = this;
-    const { populates = [] } = this._options;
+    const { populates = [], defaultIndexSelect } = this._options;
     const query = ctx.query;
     const pageSize = Number(ctx.query.pageSize) || 20;
     const page = Number(ctx.query.pageNum) || 1;
     const params = { ...query };
+    const { select } = params;
+    delete params.select;
     delete params.pageSize;
     delete params.pageNum;
     const mongoQuery = this.Model.find(params)
+      .select()
       .sort({ createdAt: -1 })
       .limit(pageSize)
       .skip((page - 1) * pageSize);
 
+    if (defaultIndexSelect || select) {
+      mongoQuery.select(select || defaultIndexSelect);
+    }
     populates.forEach(v => mongoQuery.populate(v));
     const list = await mongoQuery;
     this.success({
@@ -65,8 +71,12 @@ class BaseController extends Controller {
   async show() {
     const { ctx, config } = this;
     const { id } = ctx.params;
-
-    const item = await this.Model.findById(id);
+    const { select } = ctx.query;
+    const mongoQuery = this.Model.findById(id);
+    if (select) {
+      mongoQuery.select(select);
+    }
+    const item = await mongoQuery;
     ctx.assert(item, config.statusCode.NO_FOUND, '资源不存在');
     this.success(item);
   }

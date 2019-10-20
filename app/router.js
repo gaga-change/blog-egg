@@ -34,7 +34,6 @@ module.exports = app => {
 
   // ## 文章
   router.get('/api/posts', controller.post.index);
-  router.get('/api/posts/archives', controller.post.archives); // 归档
   router.get('/api/posts/:id', controller.post.show);
   router.post('/api/posts', admin, controller.post.create);
   router.put('/api/posts/:id', admin, controller.post.update);

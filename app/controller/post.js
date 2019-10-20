@@ -13,14 +13,9 @@ class PostController extends BaseController {
         { path: 'tags', select: '_id name' },
         { path: 'category', select: '_id name' },
         { path: 'logos' }],
+      defaultIndexSort: { releaseDate: -1 },
       defaultIndexSelect: '-markdown -content -history',
     }, ...args);
-  }
-
-  /** 归档 */
-  async archives() {
-    const { ctx, service } = this;
-    ctx.body = await service.post.archives();
   }
 
   /** 增加点击量 */

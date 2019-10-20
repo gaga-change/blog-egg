@@ -42,7 +42,7 @@ class BaseController extends Controller {
 
   async index() {
     const { ctx } = this;
-    const { populates = [], defaultIndexSelect } = this._options;
+    const { populates = [], defaultIndexSelect, defaultIndexSort = { createdAt: -1 } } = this._options;
     const query = ctx.query;
     const pageSize = Number(ctx.query.pageSize) || 20;
     const page = Number(ctx.query.pageNum) || 1;
@@ -52,8 +52,7 @@ class BaseController extends Controller {
     delete params.pageSize;
     delete params.pageNum;
     const mongoQuery = this.Model.find(params)
-      .select()
-      .sort({ createdAt: -1 })
+      .sort(defaultIndexSort)
       .limit(pageSize)
       .skip((page - 1) * pageSize);
 

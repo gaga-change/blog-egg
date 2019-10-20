@@ -59,20 +59,7 @@ describe('test/app/controller/post.test.js', () => {
       assert(keys.find(v => v === 'title'));
       assert(keys.find(v => v === '_id'));
     });
-    it('should GET /api/posts/archives', async () => {
-      const { Post } = app.model;
-      const temp = new Post({ title: Date.now() + '_name' });
-      await temp.save();
-      const fullYear = new Date(temp.createdAt).getFullYear() + ' ';
-      tempData.push(temp);
-      const res = await app.httpRequest()
-        .get('/api/posts/archives')
-        .set('Accept', 'application/json')
-        .expect(200);
-      assert(res.body && res.body[fullYear] && res.body[fullYear].constructor === Array);
-      const arr = res.body[fullYear];
-      assert(arr.find(v => v._id === temp._id.toString()));
-    });
+
     it('should GET /api/posts/:id', async () => {
       const { Post } = app.model;
       const temp = new Post({ title: Date.now() + '_name' });

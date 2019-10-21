@@ -12,6 +12,7 @@ module.exports = app => {
     subhead: { type: String, default: '', trim: true }, // 副标题
     description: { type: String, default: '', trim: true }, // 描述
     keywords: { type: String, default: '', trim: true }, // 关键词
+    appendJsFileUrl: { type: String, default: '', trim: true }, // 额外的js文件url地址
   }, {
     timestamps: true,
   });

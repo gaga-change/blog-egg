@@ -41,6 +41,13 @@ module.exports = app => {
   router.delete('/api/posts/:id', admin, controller.post.destroy);
   router.put('/api/posts/:id/autoAddReadTime', controller.post.autoAddReadTime); // 增加点击量
 
+  // ## 站点设置
+  router.get('/api/webSets', controller.webSet.index);
+  router.get('/api/webSets/:id', controller.webSet.show);
+  router.post('/api/webSets', admin, controller.webSet.create);
+  router.put('/api/webSets/:id', admin, controller.webSet.update);
+  router.delete('/api/webSets/:id', admin, controller.webSet.destroy);
+
   // ## 工具
   router.post('/api/upload', admin, controller.upload.uploadNotRequiredFile); // 上传文件到七牛云
 

@@ -47,6 +47,13 @@ module.exports = app => {
   router.put('/api/webSets/:id', admin, controller.webSet.update);
   router.delete('/api/webSets/:id', admin, controller.webSet.destroy);
 
+  // ## 导航栏配置
+  router.get('/api/pageMenus', controller.pageMenu.index);
+  router.get('/api/pageMenus/:id', controller.pageMenu.show);
+  router.post('/api/pageMenus', admin, controller.pageMenu.create);
+  router.put('/api/pageMenus/:id', admin, controller.pageMenu.update);
+  router.delete('/api/pageMenus/:id', admin, controller.pageMenu.destroy);
+
   // ## 工具
   router.post('/api/upload', admin, controller.upload.uploadNotRequiredFile); // 上传文件到七牛云
 

@@ -39,6 +39,7 @@ module.exports = app => {
   router.put('/api/posts/:id', admin, controller.post.update);
   router.delete('/api/posts/:id', admin, controller.post.destroy);
   router.put('/api/posts/:id/autoAddReadTime', controller.post.autoAddReadTime); // 增加点击量
+  router.get('/api/posts/:id/pushBaiduSearch', admin, controller.post.pushBaiduSearch); // 推送百度搜索
 
   // ## 站点设置
   router.get('/api/webSets', controller.webSet.index);

@@ -77,5 +77,6 @@ module.exports = appInfo => {
       fileSize: '3mb',
     },
     qiniu: qiniuConfig,
+    baiduSearchPushUrl: process.env.BAIDU_SEARCH_PUSH_URL,
   };
 };

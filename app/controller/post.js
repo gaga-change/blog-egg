@@ -26,6 +26,20 @@ class PostController extends BaseController {
     await Post.updateOne({ _id: id }, { $inc: { readTime: 1 } });
     this.success(null, 204);
   }
+
+  /** 推送seo */
+  async pushBaiduSearch() {
+    const { ctx, app, config } = this;
+    const { id } = ctx.params;
+    ctx.assert(config.baiduSearchPushUrl, '百度主动提交地址未配置！');
+    const result = await app.curl(config.baiduSearchPushUrl, {
+      method: 'post',
+      dataType: 'json',
+      contentType: 'text',
+      data: `https://www.yanjd.top/archives/${id}`,
+    });
+    ctx.body = result;
+  }
 }
 
 module.exports = PostController;
